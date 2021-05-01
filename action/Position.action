@@ -1,5 +1,7 @@
 # goal definition
-float32[] goal
+float32 x
+float32 y
+float32 theta
 
 ---
 
@@ -9,4 +11,6 @@ bool result
 ---
 
 # feedback definition
-float32 distance
+float32 x
+float32 y
+float32 theta
