@@ -9,7 +9,7 @@ from tf import transformations
 import math
 
 import actionlib
-from rt2assignment1.msg import PositionAction
+import rt2_assignment1.msg #import PositionAction
 
 # robot state variables
 position_ = Point()
@@ -31,107 +31,13 @@ ub_d = 0.6
 class PositionAction():
 	
 	# create messages that are used to publish feedback/result
-	_feedback = rt2assignment1.msg.PositionFeedback()
-	_result = rt2assignment1.msg.PositionResult()
+	_feedback = rt2_assignment1.msg.PositionFeedback()
+	_result = rt2_assignment1.msg.PositionResult()
 	
 	#constructor
 	def __init__(self):
-		self.server = actionlib.SimpleActionServer('position', rt2assignment1.PositionAction, self.go_to_point, auto_start = False)
+		self.server = actionlib.SimpleActionServer('position', rt2_assignment1.msg.PositionAction, self.go_to_point, auto_start = False)
 		self.server.start()
-        
-
-	def clbk_odom(self,msg):
-		global position_
-		global yaw_
-
-		# position
-		position_ = msg.pose.pose.position
-
-		# yaw
-		quaternion = (
-			msg.pose.pose.orientation.x,
-			msg.pose.pose.orientation.y,
-			msg.pose.pose.orientation.z,
-			msg.pose.pose.orientation.w)
-		euler = transformations.euler_from_quaternion(quaternion)
-		yaw_ = euler[2]
-
-
-	def change_state(self,state):
-		global state_
-		state_ = state
-		print ('State changed to [%s]' % state_)
-		
-
-	def normalize_angle(self,angle):
-		if(math.fabs(angle) > math.pi):
-			angle = angle - (2 * math.pi * angle) / (math.fabs(angle))
-		return angle
-
-	def fix_yaw(self,des_pos):
-		desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
-		err_yaw = normalize_angle(desired_yaw - yaw_)
-		rospy.loginfo(err_yaw)
-		twist_msg = Twist()
-		if math.fabs(err_yaw) > yaw_precision_2_:
-			twist_msg.angular.z = kp_a*err_yaw
-			if twist_msg.angular.z > ub_a:
-				twist_msg.angular.z = ub_a
-			elif twist_msg.angular.z < lb_a:
-				twist_msg.angular.z = lb_a
-		pub_.publish(twist_msg)
-		# state change conditions
-		if math.fabs(err_yaw) <= yaw_precision_2_:
-			#print ('Yaw error: [%s]' % err_yaw)
-			change_state(1)
-
-
-	def go_straight_ahead(self,des_pos):
-		desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
-		err_yaw = desired_yaw - yaw_
-		err_pos = math.sqrt(pow(des_pos.y - position_.y, 2) +
-							pow(des_pos.x - position_.x, 2))
-		err_yaw = normalize_angle(desired_yaw - yaw_)
-		rospy.loginfo(err_yaw)
-
-		if err_pos > dist_precision_:
-			twist_msg = Twist()
-			twist_msg.linear.x = 0.3
-			if twist_msg.linear.x > ub_d:
-				twist_msg.linear.x = ub_d
-
-			twist_msg.angular.z = kp_a*err_yaw
-			pub_.publish(twist_msg)
-		else: # state change conditions
-			#print ('Position error: [%s]' % err_pos)
-			change_state(2)
-
-		# state change conditions
-		if math.fabs(err_yaw) > yaw_precision_:
-			#print ('Yaw error: [%s]' % err_yaw)
-			change_state(0)
-
-	def fix_final_yaw(self,des_yaw):
-		err_yaw = normalize_angle(des_yaw - yaw_)
-		rospy.loginfo(err_yaw)
-		twist_msg = Twist()
-		if math.fabs(err_yaw) > yaw_precision_2_:
-			twist_msg.angular.z = kp_a*err_yaw
-			if twist_msg.angular.z > ub_a:
-				twist_msg.angular.z = ub_a
-			elif twist_msg.angular.z < lb_a:
-				twist_msg.angular.z = lb_a
-		pub_.publish(twist_msg)
-		# state change conditions
-		if math.fabs(err_yaw) <= yaw_precision_2_:
-			#print ('Yaw error: [%s]' % err_yaw)
-			change_state(3)
-			
-	def done(self):
-		twist_msg = Twist()
-		twist_msg.linear.x = 0
-		twist_msg.angular.z = 0
-		pub_.publish(twist_msg)
 		
 	def go_to_point(self, goal):
 		#helper variable 
@@ -169,8 +75,104 @@ class PositionAction():
 					done()
 					rospy.loginfo('Goal reached!')
 					self._result.result = True
-					self.server.set_succeeded(self._result.result)
+					self.server.set_succeeded(self._result)
 					break 
+
+
+def clbk_odom(msg):
+	global position_
+	global yaw_
+
+	# position
+	position_ = msg.pose.pose.position
+
+	# yaw
+	quaternion = (
+		msg.pose.pose.orientation.x,
+		msg.pose.pose.orientation.y,
+		msg.pose.pose.orientation.z,
+		msg.pose.pose.orientation.w)
+	euler = transformations.euler_from_quaternion(quaternion)
+	yaw_ = euler[2]
+
+
+def change_state(state):
+	global state_
+	state_ = state
+	print ('State changed to [%s]' % state_)
+	
+
+def normalize_angle(angle):
+	if(math.fabs(angle) > math.pi):
+		angle = angle - (2 * math.pi * angle) / (math.fabs(angle))
+	return angle
+
+def fix_yaw(des_pos):
+	desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
+	err_yaw = normalize_angle(desired_yaw - yaw_)
+	rospy.loginfo(err_yaw)
+	twist_msg = Twist()
+	if math.fabs(err_yaw) > yaw_precision_2_:
+		twist_msg.angular.z = kp_a*err_yaw
+		if twist_msg.angular.z > ub_a:
+			twist_msg.angular.z = ub_a
+		elif twist_msg.angular.z < lb_a:
+			twist_msg.angular.z = lb_a
+	pub_.publish(twist_msg)
+	# state change conditions
+	if math.fabs(err_yaw) <= yaw_precision_2_:
+		#print ('Yaw error: [%s]' % err_yaw)
+		change_state(1)
+
+
+def go_straight_ahead(des_pos):
+	desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
+	err_yaw = desired_yaw - yaw_
+	err_pos = math.sqrt(pow(des_pos.y - position_.y, 2) +
+						pow(des_pos.x - position_.x, 2))
+	err_yaw = normalize_angle(desired_yaw - yaw_)
+	rospy.loginfo(err_yaw)
+
+	if err_pos > dist_precision_:
+		twist_msg = Twist()
+		twist_msg.linear.x = 0.3
+		if twist_msg.linear.x > ub_d:
+			twist_msg.linear.x = ub_d
+
+		twist_msg.angular.z = kp_a*err_yaw
+		pub_.publish(twist_msg)
+	else: # state change conditions
+		#print ('Position error: [%s]' % err_pos)
+		change_state(2)
+
+	# state change conditions
+	if math.fabs(err_yaw) > yaw_precision_:
+		#print ('Yaw error: [%s]' % err_yaw)
+		change_state(0)
+
+def fix_final_yaw(des_yaw):
+	err_yaw = normalize_angle(des_yaw - yaw_)
+	rospy.loginfo(err_yaw)
+	twist_msg = Twist()
+	if math.fabs(err_yaw) > yaw_precision_2_:
+		twist_msg.angular.z = kp_a*err_yaw
+		if twist_msg.angular.z > ub_a:
+			twist_msg.angular.z = ub_a
+		elif twist_msg.angular.z < lb_a:
+			twist_msg.angular.z = lb_a
+	pub_.publish(twist_msg)
+	# state change conditions
+	if math.fabs(err_yaw) <= yaw_precision_2_:
+		#print ('Yaw error: [%s]' % err_yaw)
+		change_state(3)
+		
+def done():
+	twist_msg = Twist()
+	twist_msg.linear.x = 0
+	twist_msg.angular.z = 0
+	pub_.publish(twist_msg)
+
+
 
 def main():
 	global pub_

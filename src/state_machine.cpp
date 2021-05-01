@@ -5,7 +5,9 @@
 
 #include "actionlib/client/simple_action_client.h"
 #include "actionlib/client/terminal_state.h"
-#include "rt2assignment1/PositionAction.h"
+#include "rt2_assignment1/PositionAction.h"
+
+
 
 bool start = false;
 
@@ -29,7 +31,7 @@ int main(int argc, char **argv)
    //ros::ServiceClient client_p = n.serviceClient<rt2_assignment1::Position>("/go_to_point");
    
    //my action
-   actionlib::SimpleActionClient<rt2assignment1::PositionAction> client_pos("position", true);   
+   actionlib::SimpleActionClient<rt2_assignment1::PositionAction> client_pos("position", true);   
    client_pos.waitForServer(); //will wait for infinite time
    
    rt2_assignment1::RandomPosition rp;
@@ -42,7 +44,7 @@ int main(int argc, char **argv)
    	ros::spinOnce();
    	if (start){
    		client_rp.call(rp);
-   		rt2assignment1::PositionGoal goal;
+   		rt2_assignment1::PositionGoal goal;
 		goal.x = rp.response.x;
 		goal.y = rp.response.y;
 		goal.theta = rp.response.theta;
