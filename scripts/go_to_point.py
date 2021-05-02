@@ -48,29 +48,32 @@ class PositionAction():
 		desired_position.y = goal.y
 		des_yaw = goal.theta
 		change_state(0)
-		#maybe in this while we can add the feedback about the current position
+		
 			
 		while True:
 			
-			#if goal canceled ? or is also when another goal is set?
+			#if goal canceled or when another goal is set
 			if self.server.is_preempt_requested():
 				rospy.loginfo('PositionAction Preempted')
-				seld.server.set_preempted()
+				self.server.set_preempted()
 				success = False
 				#stop robot
 				done()
 				break
-				
-			#here I can insert the feedback or maybe inside the two if 
-			# specifing distance or yaw difference
 			
 			if success:
 				if state_ == 0:
 					fix_yaw(desired_position)
+					#self._feedback.status = "Fixing the yaw to go"
+					#self.server.publish_feedback(_feedback)
 				elif state_ == 1:
 					go_straight_ahead(desired_position)
+					#self._feedback.status = "Going to the goal"
+					#self.server.publish_feedback(_feedback)
 				elif state_ == 2:
 					fix_final_yaw(des_yaw)
+					#self._feedback.status = "Fixing the final yaw"
+					#self.server.publish_feedback(_feedback)
 				elif state_ == 3:
 					done()
 					rospy.loginfo('Goal reached!')

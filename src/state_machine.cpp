@@ -30,7 +30,7 @@ int main(int argc, char **argv)
    ros::ServiceClient client_rp = n.serviceClient<rt2_assignment1::RandomPosition>("/position_server");
    //ros::ServiceClient client_p = n.serviceClient<rt2_assignment1::Position>("/go_to_point");
    
-   //my action
+   //go_to_point action client
    actionlib::SimpleActionClient<rt2_assignment1::PositionAction> client_pos("position", true);   
    client_pos.waitForServer(); //will wait for infinite time
    
@@ -54,16 +54,15 @@ int main(int argc, char **argv)
    		
    		//wait for the action to return
 		bool finished_before_timeout = client_pos.waitForResult(ros::Duration(30.0)); //true if the return is done befor timer expire(30 sec), otherwise false
-
+		
 		if (finished_before_timeout)
 		{
 			actionlib::SimpleClientGoalState state = client_pos.getState();
 			ROS_INFO("Action finished: %s",state.toString().c_str());
 		}
-		else
+		else 
 			ROS_INFO("Action did not finish before the time out.");
- 
-   		std::cout << "Position reached" << std::endl;
+		
    	}
    }
    return 0;
