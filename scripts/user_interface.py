@@ -19,13 +19,16 @@ def main():
 		if (x == 1):
 			ui_client("start")
 			x = int(input("\nPress 0 to stop the robot "))
-		else:
+		elif (x == 0):
 			#print("Please wait, the robot is going to stop when the position will be reached")
 			#cancel goal
 			act_client.cancel_all_goals()
-			print("goal cancelled, robot is stoppeed")
+			print("goal cancelled, robot is stopped")
 			ui_client("stop")
 			x = int(input("\nPress 1 to start the robot "))
+		else:
+			x = int(input("\nCommand unknown, please enter 1 to start the robot or 0 to stop the robot"))
+			
             
 if __name__ == '__main__':
 	main()
