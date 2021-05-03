@@ -1,8 +1,9 @@
+
 #include <inttypes.h>
 #include <memory>
-#include "rt2_assignment1/srv/command.h"
-#include "rt2_assignment1/srv/position.h"
-#include "rt2_assignment1/srv/random_position.h"
+#include "rt2_assignment1/srv/command.hpp"
+#include "rt2_assignment1/srv/position.hpp"
+#include "rt2_assignment1/srv/random_position.hpp"
 #include "rclcpp_components/register_node_macrohpp"
 
 
@@ -98,9 +99,3 @@ namespace rt2_assignment1{
 }
 
 RCLCPP_COMPONENTS_REGISTER_NODE(rt2_assignment1:StateMachine)
-
-
-
-
-
-
