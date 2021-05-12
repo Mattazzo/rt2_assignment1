@@ -3,7 +3,7 @@
 #include <memory>
 #include "rt2_assignment1/srv/random_position.hpp"
 #include "rclcpp/rclcpp.hpp"
-#include "rclcpp_components/register_node_macrohpp"
+#include "rclcpp_components/register_node_macro.hpp"
 
 using RandomPosition = rt2_assignment1::srv::RandomPosition;
 using std::placeholders::_1;
@@ -28,8 +28,8 @@ namespace rt2_assignment1{
 
 
 			bool myrandom (const std::shared_ptr<rmw_request_id_t> request_header,
-							rt2_assignment1::RandomPosition::Request &req, 
-							rt2_assignment1::RandomPosition::Response &res)
+					const std::shared_ptr<RandomPosition::Request> req, 
+					const std::shared_ptr<RandomPosition::Response> res)
 			{
 				(void)request_header; // to avoid warnings
 				res->x = randMToN(req->x_min, req->x_max);
@@ -42,6 +42,6 @@ namespace rt2_assignment1{
 	};
 }
 
-RCLCPP_COMPONENTS_REGISTER_NODE(rt2_assignment1:PositionServer)
+RCLCPP_COMPONENTS_REGISTER_NODE(rt2_assignment1::PositionServer)
 
 
