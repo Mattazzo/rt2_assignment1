@@ -1,5 +1,8 @@
 #! /usr/bin/env python
 
+"""
+This node implement a ROS Action to let the robot go to a goal position 
+"""
 
 import rospy
 from geometry_msgs.msg import Twist, Point
@@ -29,6 +32,9 @@ lb_a = -0.5
 ub_d = 0.6
 
 class PositionAction():
+	"""
+	Class definition of the Action server go to point
+	"""
 	
 	# create messages that are used to publish feedback/result
 	_feedback = rt2_assignment1.msg.PositionFeedback()
@@ -36,10 +42,23 @@ class PositionAction():
 	
 	#constructor
 	def __init__(self):
+		"""Constructor"""
 		self.server = actionlib.SimpleActionServer('position', rt2_assignment1.msg.PositionAction, self.go_to_point, auto_start = False)
 		self.server.start()
 		
 	def go_to_point(self, goal):
+		"""
+		Method of the action server, if goal is canceled, robot is stopped.
+		Otherwise, if goal is set, it works as a finite state machine with
+		4 state:
+			0 - Rotate robot to be headed for the goal
+			1 - Go straight ahead
+			2 - Robot is in the goal point, rotate to fix the heading
+			3 - Goal reached, stop the robot 
+			
+		parameters
+			- goal: goal to be reached by the robot
+		"""
 		#helper variable 
 		success = True
 		
@@ -64,16 +83,10 @@ class PositionAction():
 			if success:
 				if state_ == 0:
 					fix_yaw(desired_position)
-					#self._feedback.status = "Fixing the yaw to go"
-					#self.server.publish_feedback(_feedback)
 				elif state_ == 1:
 					go_straight_ahead(desired_position)
-					#self._feedback.status = "Going to the goal"
-					#self.server.publish_feedback(_feedback)
 				elif state_ == 2:
 					fix_final_yaw(des_yaw)
-					#self._feedback.status = "Fixing the final yaw"
-					#self.server.publish_feedback(_feedback)
 				elif state_ == 3:
 					done()
 					rospy.loginfo('Goal reached!')
@@ -83,6 +96,13 @@ class PositionAction():
 
 
 def clbk_odom(msg):
+	"""
+	Callback function of subscriber for topic /odom, get the position 
+	and the quaternion of the robot
+	
+	parameters:
+		- msg: message of type Odometry to get robot position and quaternion
+	"""
 	global position_
 	global yaw_
 
@@ -100,17 +120,35 @@ def clbk_odom(msg):
 
 
 def change_state(state):
+	"""
+	Function to change state for finite state machine in go to poin function
+	
+	parameters:
+		- state: state of the finite state machine in go to point function
+	"""
 	global state_
 	state_ = state
 	print ('State changed to [%s]' % state_)
 	
 
 def normalize_angle(angle):
+	"""
+	Function to normalize an angle
+	
+	parameters:
+		- angle: angle to be normalized
+	"""
 	if(math.fabs(angle) > math.pi):
 		angle = angle - (2 * math.pi * angle) / (math.fabs(angle))
 	return angle
 
 def fix_yaw(des_pos):
+	"""
+	Function to rotate the robot to be headed for the goal
+	
+	parameters:
+		- des_pos: goal position to set the right angular velocity for rotation
+	"""
 	desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
 	err_yaw = normalize_angle(desired_yaw - yaw_)
 	rospy.loginfo(err_yaw)
@@ -129,6 +167,12 @@ def fix_yaw(des_pos):
 
 
 def go_straight_ahead(des_pos):
+	"""
+	Function to go straight ahead
+	
+	parameters:
+		- des_pos: goal position to set the right linear velocity
+	"""
 	desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
 	err_yaw = desired_yaw - yaw_
 	err_pos = math.sqrt(pow(des_pos.y - position_.y, 2) +
@@ -154,6 +198,13 @@ def go_straight_ahead(des_pos):
 		change_state(0)
 
 def fix_final_yaw(des_yaw):
+	"""
+	Function to rotate the robot, when he is in the right position, to 
+	have the goal orientation
+	
+	parameters:
+		- des_yaw: desired angle 
+	"""
 	err_yaw = normalize_angle(des_yaw - yaw_)
 	rospy.loginfo(err_yaw)
 	twist_msg = Twist()
@@ -170,6 +221,9 @@ def fix_final_yaw(des_yaw):
 		change_state(3)
 		
 def done():
+	"""
+	Function to stop the robot
+	"""
 	twist_msg = Twist()
 	twist_msg.linear.x = 0
 	twist_msg.angular.z = 0
@@ -178,6 +232,10 @@ def done():
 
 
 def main():
+	"""
+	Main function with declaration of a publisher for /cmd_vel topic, a 
+	subscriber for /odom topic, an action server for go to point service
+	"""
 	global pub_
 	rospy.init_node('go_to_point')
 	pub_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)

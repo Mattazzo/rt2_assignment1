@@ -1,16 +1,31 @@
+/**
+ * State_machine node which controls the robot, interact with random 
+ * position service to get a random goal and with position action server 
+ * to reach it. This node implemtn also a server for user_command service, 
+ * to let user control the robot.
+ */
+
 #include "ros/ros.h"
 #include "rt2_assignment1/Command.h"
 #include "rt2_assignment1/RandomPosition.h"
-
-
 #include "actionlib/client/simple_action_client.h"
 #include "actionlib/client/terminal_state.h"
 #include "rt2_assignment1/PositionAction.h"
 
 
-
 bool start = false;
 
+/**
+ * Function of user interface server, it start or stop the robot depending 
+ * on user request 
+ * 
+ * @param 
+ * 			- req: request for the server
+ * 			- res: response from the server
+ * 
+ * @return 	
+ * 			- true: always true 
+ */
 bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Command::Response &res){
     if (req.command == "start"){
     	start = true;
@@ -21,7 +36,16 @@ bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Com
     return true;
 }
 
-
+/**
+ * Main function with declaration of a server for user_interface service,
+ * a client to get a random position and an action client to reach the 
+ * desired position. If user requested to start the robot, the node make 
+ * a request to get a random position and send this position as goal for 
+ * the action server. Then a timer of 30 second starts, if robot reach the
+ * goal before the expiring of the timer, it prints the action status SUCCEDED, 
+ * if goal is canceled, it prints the action status PREEMPTED, otherwise,
+ * when timer expires, it prints "Action did not finish before the time out."
+ */
 int main(int argc, char **argv)
 {
    ros::init(argc, argv, "state_machine");
