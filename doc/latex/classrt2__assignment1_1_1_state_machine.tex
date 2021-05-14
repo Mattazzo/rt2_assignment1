@@ -1,0 +1,51 @@
+\hypertarget{classrt2__assignment1_1_1_state_machine}{}\doxysection{rt2\+\_\+assignment1\+::State\+Machine Class Reference}
+\label{classrt2__assignment1_1_1_state_machine}\index{rt2\_assignment1::StateMachine@{rt2\_assignment1::StateMachine}}
+
+
+Inheritance diagram for rt2\+\_\+assignment1\+::State\+Machine\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{classrt2__assignment1_1_1_state_machine__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for rt2\+\_\+assignment1\+::State\+Machine\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{classrt2__assignment1_1_1_state_machine__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classrt2__assignment1_1_1_state_machine_af6d63f4d9d1fc8f55fdc97f09862ad4f}{State\+Machine}} (const rclcpp\+::\+Node\+Options \&options)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class \mbox{\hyperlink{classrt2__assignment1_1_1_state_machine}{State\+Machine}} that implement robot behaviour, implement a server for user\+\_\+command service, when user request to start the robot, the class call his method motion() to let it request a random goal and reach it. If user request to stop the robot, it will stop when the next goal is reached. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classrt2__assignment1_1_1_state_machine_af6d63f4d9d1fc8f55fdc97f09862ad4f}\label{classrt2__assignment1_1_1_state_machine_af6d63f4d9d1fc8f55fdc97f09862ad4f}} 
+\index{rt2\_assignment1::StateMachine@{rt2\_assignment1::StateMachine}!StateMachine@{StateMachine}}
+\index{StateMachine@{StateMachine}!rt2\_assignment1::StateMachine@{rt2\_assignment1::StateMachine}}
+\doxysubsubsection{\texorpdfstring{StateMachine()}{StateMachine()}}
+{\footnotesize\ttfamily rt2\+\_\+assignment1\+::\+State\+Machine\+::\+State\+Machine (\begin{DoxyParamCaption}\item[{const rclcpp\+::\+Node\+Options \&}]{options }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Class constructor, it contains declaration of a server for Command service, a client for Random\+Position and a client for Position service
+
+
+\begin{DoxyParams}{Parameters}
+{\em options} & Node\+Options object to create the node \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{state__machine_8cpp}{state\+\_\+machine.\+cpp}}\end{DoxyCompactItemize}
