@@ -13,7 +13,7 @@
 #include "rt2_assignment1/PositionAction.h"
 
 
-bool start = false;
+bool start = false; /*!< variable use to start the robot if it is true */
 
 /**
  * Function of user interface server, it start or stop the robot depending 

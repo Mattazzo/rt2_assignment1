@@ -34,6 +34,22 @@ ub_d = 0.6
 class PositionAction():
 	"""
 	Class definition of the Action server go to point
+	
+	...
+	
+	Attributes
+	----------	
+	_feedback: PositionFeedback
+		feedback of PositionAction
+	_result: PositionResult
+		result of PositionAction
+		
+	Methods
+	----------	
+	__init__(self)
+		class constructor
+	go_to_point(self, goal)	
+		implement a state machine to let the robot reach a goal position
 	"""
 	
 	# create messages that are used to publish feedback/result
@@ -56,8 +72,9 @@ class PositionAction():
 			2 - Robot is in the goal point, rotate to fix the heading
 			3 - Goal reached, stop the robot 
 			
-		parameters
-			- goal: goal to be reached by the robot
+		Parameters
+		----------
+			goal: goal to be reached by the robot
 		"""
 		#helper variable 
 		success = True
@@ -100,8 +117,8 @@ def clbk_odom(msg):
 	Callback function of subscriber for topic /odom, get the position 
 	and the quaternion of the robot
 	
-	parameters:
-		- msg: message of type Odometry to get robot position and quaternion
+	Args:
+		msg: message of type Odometry to get robot position and quaternion
 	"""
 	global position_
 	global yaw_
@@ -123,8 +140,8 @@ def change_state(state):
 	"""
 	Function to change state for finite state machine in go to poin function
 	
-	parameters:
-		- state: state of the finite state machine in go to point function
+	Args:
+		state: state of the finite state machine in go to point function
 	"""
 	global state_
 	state_ = state
@@ -146,8 +163,8 @@ def fix_yaw(des_pos):
 	"""
 	Function to rotate the robot to be headed for the goal
 	
-	parameters:
-		- des_pos: goal position to set the right angular velocity for rotation
+	Args:
+		des_pos: goal position to set the right angular velocity for rotation
 	"""
 	desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
 	err_yaw = normalize_angle(desired_yaw - yaw_)
@@ -170,8 +187,8 @@ def go_straight_ahead(des_pos):
 	"""
 	Function to go straight ahead
 	
-	parameters:
-		- des_pos: goal position to set the right linear velocity
+	Args:
+		des_pos: goal position to set the right linear velocity
 	"""
 	desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
 	err_yaw = desired_yaw - yaw_
@@ -202,8 +219,8 @@ def fix_final_yaw(des_yaw):
 	Function to rotate the robot, when he is in the right position, to 
 	have the goal orientation
 	
-	parameters:
-		- des_yaw: desired angle 
+	Args:
+		des_yaw: desired angle 
 	"""
 	err_yaw = normalize_angle(des_yaw - yaw_)
 	rospy.loginfo(err_yaw)
