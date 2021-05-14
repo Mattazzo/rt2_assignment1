@@ -15,7 +15,7 @@ import actionlib
 import rt2_assignment1.msg #import PositionAction
 
 # robot state variables
-position_ = Point()
+position_ = Point()	
 yaw_ = 0
 position_ = 0
 state_ = 0
@@ -152,7 +152,7 @@ def normalize_angle(angle):
 	"""
 	Function to normalize an angle
 	
-	parameters:
+	Args:
 		- angle: angle to be normalized
 	"""
 	if(math.fabs(angle) > math.pi):
