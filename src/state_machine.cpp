@@ -77,7 +77,7 @@ int main(int argc, char **argv)
    		std::cout << "\nGoing to the position: x= " << goal.x << " y= " << goal.y << " theta = " << goal.theta << std::endl;
    		
    		//wait for the action to return
-		bool finished_before_timeout = client_pos.waitForResult(ros::Duration(30.0)); //true if the return is done befor timer expire(30 sec), otherwise false
+		bool finished_before_timeout = client_pos.waitForResult(ros::Duration(30.0)); //true if the return is done before timer expire(30 sec), otherwise false
 		
 		if (finished_before_timeout)
 		{

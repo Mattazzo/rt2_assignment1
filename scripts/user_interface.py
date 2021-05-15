@@ -33,7 +33,6 @@ def main():
 			ui_client("start")
 			x = int(input("\nPress 0 to stop the robot "))
 		elif (x == 0):
-			#print("Please wait, the robot is going to stop when the position will be reached")
 			#cancel goal
 			act_client.cancel_all_goals()
 			print("goal cancelled, robot is stopped")
