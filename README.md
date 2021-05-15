@@ -42,7 +42,8 @@ To test this code is required the *ros1_bridge* package and *rt2_assignment1* pa
 ```
 roslaunch rt2_assignment1 sim_ros2_gazebo.launch
 ```
-N.B. *sim_ros2_gazebo.launch* file is available in launch folder of branch 'main' of rt2_assignment1 repository
+N.B. *sim_ros2_gazebo.launch* file is available in launch folder of branch 'main' of rt2_assignment1 repository </br>
+
 4. Open a second terminal, source ROS and ROS2 environments, go into your ROS2 workspace and execute  
 ```
 ros2 run ros1_bridge dynamic_bridge
