@@ -4,7 +4,7 @@
 In this branch I was required to write FSM and position server nodes for ROS2, as components, so that, by using the *ros1_bridge*, they can be interfaces with the ROS nodes and with the simulation in Gazebo. The *go_to_point* can still be implemented as a service.
 
 ## Package Composition
-The package contains the folllowing elements:
+The package contains the folllowing elements:</br>
 	-**doc**: folder with documentation about the package, generated with doxygen </br>
 	-**include**: folder required for a ROS2 package </br>
 	-**launch**: folder with a launch file to start a container and load the two components written in cpp </br>
@@ -18,18 +18,18 @@ The package contains the folllowing elements:
 
 ## Code Explanation
 
-### Launch files
+### Launch files</br>
 -**launch.py**: file to start a container and load inside two nodes written as components in src folder
 
-###src
+### src</br>
 -**state_machine.cpp**: implements a ROS2 component that declares a server for Command server , a client for RandomPosition service and a client for Position service. It receives the request from *user_interface* node in ROS, if user require to start the robot, this component sends a request for a random position and call *go_to_point* node to let the robot reach the goal. Otherwise, if the robot is moving and user requests to stop it, the component doesn't do anything, because *go_to_point* node stop automatically the robot when the goal is reached 
 
 -**position_server.cpp**: implements a server, as ROS2 component, which receives as request the minimum and maximum value, within choose x and y coordinates. As response returns random x, y coordinates and the heading theta for a goal position
 
-### srv
--**Command.srv**: Definition of Command service used to send a command to control the robot  
--**Position**: Definition of Position service used to reach a goal position
--**RandomPosition**: Definition of RandomPosition used to get a random goal position
+### srv</br>
+-**Command.srv**: Definition of Command service used to send a command to control the robot  </br>
+-**Position.srv**: Definition of Position service used to reach a goal position</br>
+-**RandomPosition.srv**: Definition of RandomPosition used to get a random goal position</br>
 
 ## Required Packages
 To test this code is required the *ros1_bridge* package and *rt2_assignment1* package in its original version, available in this repository, in branch 'main'.
