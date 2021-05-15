@@ -1,3 +1,4 @@
+
 #rt2_assignment1 - branch 'ros2'
 
 ##Requirements
@@ -17,6 +18,7 @@ The package contains the folllowing elements:
 	-**start_sim_ros2_coppelia.sh**: script to start the whole simulation on Vrep
 
 ##Code Explanation
+
 ###Launch files
 -**launch.py**: file to start a container and load inside two nodes written as components in src folder
 
@@ -34,6 +36,7 @@ The package contains the folllowing elements:
 To test this code is required the *ros1_bridge* package and *rt2_assignment1* package in its original version, available in this repository, in branch 'main'.
 
 ##How to execute the code
+
 ### Simulation on Gazebo manually
 1. Download and build this package in the src folder of your ROS2 worksapace, the same should be done for *ros1_bridge* package
 2. Download and build *rt2_assignment1* package in the src folder of your ROS workspace
