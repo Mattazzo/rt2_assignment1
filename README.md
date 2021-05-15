@@ -1,4 +1,4 @@
-# rt2_assignment1 - branch 'ros2'
+# rt2_assignment1 - branch 'ros2' - Matteo Azzini 4475165
 
 ## Requirements
 In this branch I was required to write FSM and position server nodes for ROS2, as components, so that, by using the *ros1_bridge*, they can be interfaces with the ROS nodes and with the simulation in Gazebo. The *go_to_point* can still be implemented as a service.
@@ -15,6 +15,7 @@ The package contains the folllowing elements:</br>
 - **pacakage.xml**: file required to build the package</br>
 - **start_sim_ros2_gazebo.sh**: script to start the whole simulation on Gazebo</br>
 - **start_sim_ros2_coppelia.sh**: script to start the whole simulation on Vrep</br>
+- **scene.ttt**: Vrep scene 
 
 ## Code Explanation
 
@@ -66,7 +67,7 @@ Once you have completed all previous steps, to start Vrep simulator you have to 
 ```
 ./coppeliaSim.sh
 ```
-From Vrep GUI you can open the scene *scene.ttt* available in 'main' branch of rt2_assignment repository and start the simulator with the play button.
+From Vrep GUI you can open the scene *scene.ttt* available in this branch or in 'main' branch and start the simulator with the play button.
 N.B. If you dont't have already *CoppeliaSim_Edu_V4_2_0_Ubuntu20_04* folder, you can download it from this link:
 http://www.coppeliarobotics.com/downloads.html
 

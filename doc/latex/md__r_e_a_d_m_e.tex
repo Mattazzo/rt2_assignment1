@@ -1,0 +1,82 @@
+\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{Requirements}\label{md__r_e_a_d_m_e_autotoc_md1}
+In this branch I was required to write F\+SM and position server nodes for R\+O\+S2, as components, so that, by using the {\itshape ros1\+\_\+bridge}, they can be interfaces with the R\+OS nodes and with the simulation in Gazebo. The {\itshape go\+\_\+to\+\_\+point} can still be implemented as a service.\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{Package Composition}\label{md__r_e_a_d_m_e_autotoc_md2}
+The package contains the folllowing elements\+:
+\begin{DoxyItemize}
+\item {\bfseries{doc}}\+: folder with documentation about the package, generated with doxygen 
+\item {\bfseries{include}}\+: folder required for a R\+O\+S2 package 
+\item {\bfseries{launch}}\+: folder with a launch file to start a container and load the two components written in cpp 
+\item {\bfseries{src}}\+: folder with the nodes written in cpp as components
+\item {\bfseries{srv}}\+: folder with .srv files to define the services
+\item {\bfseries{C\+Make\+List.\+txt}}\+: file required to build the pacakge
+\item {\bfseries{mapping\+\_\+rules.\+yaml}}\+: file in .yaml extension to define which packages and messages/services should be bridged for the communication R\+O\+S-\/\+R\+O\+S2
+\item {\bfseries{pacakage.\+xml}}\+: file required to build the package
+\item {\bfseries{start\+\_\+sim\+\_\+ros2\+\_\+gazebo.\+sh}}\+: script to start the whole simulation on Gazebo
+\item {\bfseries{start\+\_\+sim\+\_\+ros2\+\_\+coppelia.\+sh}}\+: script to start the whole simulation on Vrep
+\item {\bfseries{scene.\+ttt}}\+: Vrep scene
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysection{Code Explanation}\label{md__r_e_a_d_m_e_autotoc_md3}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{Launch files$<$/br$>$}\label{md__r_e_a_d_m_e_autotoc_md4}
+
+\begin{DoxyItemize}
+\item {\bfseries{\mbox{\hyperlink{launch_8py}{launch.\+py}}}}\+: file to start a container and load inside two nodes written as components in src folder
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{src$<$/br$>$}\label{md__r_e_a_d_m_e_autotoc_md5}
+
+\begin{DoxyItemize}
+\item {\bfseries{\mbox{\hyperlink{state__machine_8cpp}{state\+\_\+machine.\+cpp}}}}\+: implements a R\+O\+S2 component that declares a server for Command server , a client for Random\+Position service and a client for Position service. It receives the request from {\itshape user\+\_\+interface} node in R\+OS, if user require to start the robot, this component sends a request for a random position and call {\itshape go\+\_\+to\+\_\+point} node to let the robot reach the goal. Otherwise, if the robot is moving and user requests to stop it, the component doesn\textquotesingle{}t do anything, because {\itshape go\+\_\+to\+\_\+point} node stop automatically the robot when the goal is reached
+\item {\bfseries{\mbox{\hyperlink{position__server_8cpp}{position\+\_\+server.\+cpp}}}}\+: implements a server, as R\+O\+S2 component, which receives as request the minimum and maximum value, within choose x and y coordinates. As response returns random x, y coordinates and the heading theta for a goal position
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{srv$<$/br$>$}\label{md__r_e_a_d_m_e_autotoc_md6}
+
+\begin{DoxyItemize}
+\item {\bfseries{Command.\+srv}}\+: Definition of Command service used to send a command to control the robot 
+\item {\bfseries{Position.\+srv}}\+: Definition of Position service used to reach a goal position
+\item {\bfseries{Random\+Position.\+srv}}\+: Definition of Random\+Position used to get a random goal position
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysection{Required Packages}\label{md__r_e_a_d_m_e_autotoc_md7}
+To test this code is required the {\itshape ros1\+\_\+bridge} package and {\itshape \mbox{\hyperlink{namespacert2__assignment1}{rt2\+\_\+assignment1}}} package in its original version, available in this repository, in branch \textquotesingle{}main\textquotesingle{}.\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysection{How to execute the code}\label{md__r_e_a_d_m_e_autotoc_md8}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysubsection{Simulation on Gazebo manually}\label{md__r_e_a_d_m_e_autotoc_md9}
+
+\begin{DoxyEnumerate}
+\item Download and build this package in the src folder of your R\+O\+S2 worksapace, the same should be done for {\itshape ros1\+\_\+bridge} package
+\item Download and build {\itshape \mbox{\hyperlink{namespacert2__assignment1}{rt2\+\_\+assignment1}}} package in the src folder of your R\+OS workspace
+\item Open the first terminal, source R\+OS environment, go into your R\+OS workspace and execute 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{roslaunch rt2\_assignment1 sim\_ros2\_gazebo.launch}
+\end{DoxyCode}
+
+\end{DoxyEnumerate}
+
+N.\+B. {\itshape sim\+\_\+ros2\+\_\+gazebo.\+launch} file is available in launch folder of branch \textquotesingle{}main\textquotesingle{} of \mbox{\hyperlink{namespacert2__assignment1}{rt2\+\_\+assignment1}} repository 
+
+
+\begin{DoxyEnumerate}
+\item Open a second terminal, source R\+OS and R\+O\+S2 environments, go into your R\+O\+S2 workspace and execute ~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ros2 run ros1\_bridge dynamic\_bridge}
+\end{DoxyCode}
+
+\item Open a third terminal, source R\+O\+S2 environment, go into your R\+O\+S2 workspace and execute 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ros2 launch rt2\_assignment1 launch.py}
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysubsection{Simulation on Gazebo by a script}\label{md__r_e_a_d_m_e_autotoc_md10}
+Points 3,4 and 5 can be replaced by a script already availabe in this package. Copy this script in your root folder, make it executable and the execute it with\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./start\_sim\_ros2\_gazebo.sh}
+\end{DoxyCode}
+
+
+N.\+B. Before use this script you have to install {\itshape gnome-\/terminal} to open multiple terminals by script by running on your terminal. Pay also attention to the path for workingspaces in the script, you have to modify them in according with your workingspaces paths\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysubsection{Simulation on Vrep manually}\label{md__r_e_a_d_m_e_autotoc_md11}
+To execute this simulation on Vrep instead of Gazebo follow the procedure above replacing {\itshape sim\+\_\+ros2\+\_\+gazebo.\+launch} with {\itshape sim\+\_\+ros2\+\_\+coppelia.\+launch} in point 3 ( file available in \textquotesingle{}main\textquotesingle{} branch of \mbox{\hyperlink{namespacert2__assignment1}{rt2\+\_\+assignment1}} repository) Once you have completed all previous steps, to start Vrep simulator you have to open a new terminal, source R\+OS environment, go into {\itshape Coppelia\+Sim\+\_\+\+Edu\+\_\+\+V4\+\_\+2\+\_\+0\+\_\+\+Ubuntu20\+\_\+04} folder and execute\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./coppeliaSim.sh}
+\end{DoxyCode}
+
+
+From Vrep G\+UI you can open the scene {\itshape scene.\+ttt} available in this branch or in \textquotesingle{}main\textquotesingle{} branch and start the simulator with the play button. N.\+B. If you dont\textquotesingle{}t have already {\itshape Coppelia\+Sim\+\_\+\+Edu\+\_\+\+V4\+\_\+2\+\_\+0\+\_\+\+Ubuntu20\+\_\+04} folder, you can download it from this link\+: \href{http://www.coppeliarobotics.com/downloads.html}{\texttt{ http\+://www.\+coppeliarobotics.\+com/downloads.\+html}}\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysubsection{Simulation on Vrep by a script}\label{md__r_e_a_d_m_e_autotoc_md12}
+As before you can run the simulation using the script {\itshape start\+\_\+sim\+\_\+ros2\+\_\+coppelia.\+sh} available in this package\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./start\_sim\_ros2\_coppelia.sh}
+\end{DoxyCode}
+
+
+N.\+B. Before use this script you have to install {\itshape gnome-\/terminal} to open multiple terminals by script by running on your terminal. Pay also attention to the path for workingspaces in the script, you have to modify them in according with your workingspaces paths, also fro the path of {\itshape Coppelia\+Sim\+\_\+\+Edu\+\_\+\+V4\+\_\+2\+\_\+0\+\_\+\+Ubuntu20\+\_\+04} folder 
