@@ -5,16 +5,16 @@ In this branch I was required to write FSM and position server nodes for ROS2, a
 
 ## Package Composition
 The package contains the folllowing elements:</br>
-	- **doc**: folder with documentation about the package, generated with doxygen </br>
-	- **include**: folder required for a ROS2 package </br>
-	- **launch**: folder with a launch file to start a container and load the two components written in cpp </br>
-	- **src**: folder with the nodes written in cpp as components</br>
-	- **srv**: folder with .srv files to define the services</br>
-	- **CMakeList.txt**: file required to build the pacakge</br>
-	- **mapping_rules.yaml**: file in .yaml extension to define which packages and messages/services should be bridged for the communication ROS-ROS2</br>
-	-**pacakage.xml**: file required to build the package</br>
-	-**start_sim_ros2_gazebo.sh**: script to start the whole simulation on Gazebo</br>
-	-**start_sim_ros2_coppelia.sh**: script to start the whole simulation on Vrep</br>
+- **doc**: folder with documentation about the package, generated with doxygen </br>
+- **include**: folder required for a ROS2 package </br>
+- **launch**: folder with a launch file to start a container and load the two components written in cpp </br>
+- **src**: folder with the nodes written in cpp as components</br>
+- **srv**: folder with .srv files to define the services</br>
+- **CMakeList.txt**: file required to build the pacakge</br>
+- **mapping_rules.yaml**: file in .yaml extension to define which packages and messages/services should be bridged for the communication ROS-ROS2</br>
+- **pacakage.xml**: file required to build the package</br>
+- **start_sim_ros2_gazebo.sh**: script to start the whole simulation on Gazebo</br>
+- **start_sim_ros2_coppelia.sh**: script to start the whole simulation on Vrep</br>
 
 ## Code Explanation
 
