@@ -14,16 +14,16 @@ The package contains the folllowing elements\+:
 \item {\bfseries{start\+\_\+sim\+\_\+ros2\+\_\+coppelia.\+sh}}\+: script to start the whole simulation on Vrep
 \item {\bfseries{scene.\+ttt}}\+: Vrep scene
 \end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysection{Code Explanation}\label{md__r_e_a_d_m_e_autotoc_md3}
-\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{Launch files$<$/br$>$}\label{md__r_e_a_d_m_e_autotoc_md4}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{Launch files}\label{md__r_e_a_d_m_e_autotoc_md4}
 
 \begin{DoxyItemize}
 \item {\bfseries{\mbox{\hyperlink{launch_8py}{launch.\+py}}}}\+: file to start a container and load inside two nodes written as components in src folder
-\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{src$<$/br$>$}\label{md__r_e_a_d_m_e_autotoc_md5}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{src}\label{md__r_e_a_d_m_e_autotoc_md5}
 
 \begin{DoxyItemize}
 \item {\bfseries{\mbox{\hyperlink{state__machine_8cpp}{state\+\_\+machine.\+cpp}}}}\+: implements a R\+O\+S2 component that declares a server for Command server , a client for Random\+Position service and a client for Position service. It receives the request from {\itshape user\+\_\+interface} node in R\+OS, if user require to start the robot, this component sends a request for a random position and call {\itshape go\+\_\+to\+\_\+point} node to let the robot reach the goal. Otherwise, if the robot is moving and user requests to stop it, the component doesn\textquotesingle{}t do anything, because {\itshape go\+\_\+to\+\_\+point} node stop automatically the robot when the goal is reached
 \item {\bfseries{\mbox{\hyperlink{position__server_8cpp}{position\+\_\+server.\+cpp}}}}\+: implements a server, as R\+O\+S2 component, which receives as request the minimum and maximum value, within choose x and y coordinates. As response returns random x, y coordinates and the heading theta for a goal position
-\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{srv$<$/br$>$}\label{md__r_e_a_d_m_e_autotoc_md6}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{srv}\label{md__r_e_a_d_m_e_autotoc_md6}
 
 \begin{DoxyItemize}
 \item {\bfseries{Command.\+srv}}\+: Definition of Command service used to send a command to control the robot 

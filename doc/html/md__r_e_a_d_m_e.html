@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>rt2_assignment1 - branch &#39;ros2&#39;  - Matteo Azzini 4475165: rt2_assignment1 - branch &#39;ros2&#39; - Matteo Azzini 4475165</title>
+<title>rt2_assignment1 - &#39;ros2&#39; branch - Matteo Azzini 4475165: rt2_assignment1 - branch &#39;ros2&#39; - Matteo Azzini 4475165</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">rt2_assignment1 - branch &#39;ros2&#39;  - Matteo Azzini 4475165
+   <div id="projectname">rt2_assignment1 - &#39;ros2&#39; branch - Matteo Azzini 4475165
    </div>
   </td>
  </tr>
@@ -86,18 +86,18 @@ Package Composition</h1>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Code Explanation</h1>
 <h2><a class="anchor" id="autotoc_md4"></a>
-Launch files&lt;/br&gt;</h2>
+Launch files</h2>
 <ul>
 <li><b><a class="el" href="launch_8py.html">launch.py</a></b>: file to start a container and load inside two nodes written as components in src folder</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md5"></a>
-src&lt;/br&gt;</h2>
+src</h2>
 <ul>
 <li><b><a class="el" href="state__machine_8cpp.html">state_machine.cpp</a></b>: implements a ROS2 component that declares a server for Command server , a client for RandomPosition service and a client for Position service. It receives the request from <em>user_interface</em> node in ROS, if user require to start the robot, this component sends a request for a random position and call <em>go_to_point</em> node to let the robot reach the goal. Otherwise, if the robot is moving and user requests to stop it, the component doesn't do anything, because <em>go_to_point</em> node stop automatically the robot when the goal is reached</li>
 <li><b><a class="el" href="position__server_8cpp.html">position_server.cpp</a></b>: implements a server, as ROS2 component, which receives as request the minimum and maximum value, within choose x and y coordinates. As response returns random x, y coordinates and the heading theta for a goal position</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md6"></a>
-srv&lt;/br&gt;</h2>
+srv</h2>
 <ul>
 <li><b>Command.srv</b>: Definition of Command service used to send a command to control the robot </li>
 <li><b>Position.srv</b>: Definition of Position service used to reach a goal position</li>
