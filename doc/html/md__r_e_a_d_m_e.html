@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>rt2_assignment1: First Assignment of the Research Track 2 course (Robotics Engineering / JEMARO, Unige)</title>
+<title>rt2_assignment1 - branch &#39;action - Matteo Azzini 4475165: rt2_assignment1 - branch raction&#39; - Matteo Azzini 4475165</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">rt2_assignment1
+   <div id="projectname">rt2_assignment1 - branch &#39;action - Matteo Azzini 4475165
    </div>
   </td>
  </tr>
@@ -62,11 +62,70 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">First Assignment of the Research Track 2 course (Robotics Engineering / JEMARO, Unige) </div>  </div>
+<div class="title">rt2_assignment1 - branch raction' - Matteo Azzini 4475165 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The package contains the nodes and the simulation environment for controlling a mobile robot in the Gazebo simulation environment. To launch the node, please run: </p><div class="fragment"><div class="line">rosrun rt2_assignment1 sim.launch</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+<div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
+Requirements</h1>
+<p>In this branch I was required to write <em><a class="el" href="go__to__point_8py.html">go_to_point.py</a></em> node as an ROS Action server instead of a simple server. Therefore I had also to modify the FSM node in oredr to let it be able to cancel a goal.</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Package Composition</h1>
+<p>The package contains the folllowing elements:</p><ul>
+<li><b>action</b>: folder with .action file to define an action</li>
+<li><b>doc</b>: folder with documentation about the package, generated with doxygen </li>
+<li><b>include</b>: folder required for a ROS2 package </li>
+<li><b>launch</b>: folder with a launch files to start the simulation both on Gazebo and Vrep</li>
+<li><b>src</b>: folder with the nodes written in cpp </li>
+<li><b>urdf:</b>: folder with info about the robot to spawn it in Gazebo simulation</li>
+<li><b>srv</b>: folder with .srv files to define the services</li>
+<li><b>CMakeList.txt</b>: file required to build the pacakge</li>
+<li><b>pacakage.xml</b>: file required to build the package</li>
+<li><b>scene.ttt</b>: Vrep scene</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Code Explanation</h1>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Launch files</h2>
+<ul>
+<li><b>sim.launch</b>: file to start the simulation on Gazebo</li>
+<li><b>sim_coppelia.launch</b>: file to start the simulation on Vrep</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md5"></a>
+Scripts</h2>
+<ul>
+<li><b><a class="el" href="go__to__point_8py.html">go_to_point.py</a></b>: Action server to let the robot reach the goal position. It works as a finite state machine, when a goal position is received, it fixs robot yaw, go straight to the point and then rotate to have its heading like the desired yaw, so goal is reached. If the goal is canceled in the meanwhile robot is moving, server is preempted and so robot is stopped.</li>
+<li><b><a class="el" href="user__interface_8py.html">user_interface.py</a></b>: ROS node to let user command the robot, it has a client for Command service and an action client for RandomPosition service. When user press 1 robot it makes a request to <em><a class="el" href="state__machine_8cpp.html">state_machine.cpp</a></em> and robot start moving, otherwise, if he press 0, there is a request for COmmand server to stop the <em><a class="el" href="state__machine_8cpp.html">state_machine.cpp</a></em> node, but also an action request <em>cancell_all_goals()</em> to cancel the goal for the robot and stop it as soon as possible. <br  />
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md6"></a>
+src</h2>
+<ul>
+<li><b><a class="el" href="state__machine_8cpp.html">state_machine.cpp</a></b>: ROS node with a server for Command service, a client fro RandomPosition service and an action client for Position service. When the server receives a "start" command, it sets a variable start to true and the main function has a loop that request a random goal position, then send it as a goal for the action server <em><a class="el" href="go__to__point_8py.html">go_to_point.py</a></em> in order to reach the goal. If the goal is reached before 30 seconds it prints the status SUCCEDEED, if the goal is canceled it prints the status PREEMPTED, otherwise if timer expires before reaching the goal, it prints a message to inform user that action is not finisched in time</li>
+<li><b>position_server.cpp</b>: implements a ROS server which receives as request the minimum and maximum value, within choose x and y coordinates. As response returns random x, y coordinates and the heading theta for a goal position</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md7"></a>
+srv</h2>
+<ul>
+<li><b>Command.srv</b>: Definition of Command service used to send a command to control the robot </li>
+<li><b>Position.srv</b>: Definition of Position service used to reach a goal position</li>
+<li><b>RandomPosition.srv</b>: Definition of RandomPosition used to get a random goal position</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md8"></a>
+How to execute the code</h1>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Simulation on Gazebo</h2>
+<ol type="1">
+<li>Download and build this package in the src folder of your ROS worksapace</li>
+<li>Launch the simulation executing the following command in your ROS worksapce <div class="fragment"><div class="line">roslaunch rt2_assignment1 sim.launch</div>
+</div><!-- fragment --></li>
+</ol>
+<p>N.B. Remeber to source your ROS workspace</p>
+<h2><a class="anchor" id="autotoc_md10"></a>
+Simulation on Vrep</h2>
+<p>Repeate points 1 and 2 as before, but with a different launch file </p><div class="fragment"><div class="line">roslaunch rt2_assignemnt1 sim_coppelia.launch</div>
+</div><!-- fragment --><p>Then in another terminal you need to source again the ROS environment, than go into <em>CoppeliaSim_Edu_V4_2_0_Ubuntu20_04</em> folder ( available at this link <a href="http://www.coppeliarobotics.com/downloads.html">http://www.coppeliarobotics.com/downloads.html</a> ) and excute </p><div class="fragment"><div class="line">./coppeliaSim.sh</div>
+</div><!-- fragment --><p>The Vrep GUI will start, from here you need to open the vrep scene <em>scene.ttt</em> available in this branch and start the simulation with the play button </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
