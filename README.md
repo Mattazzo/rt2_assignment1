@@ -59,7 +59,7 @@ Points 3,4 and 5 can be replaced by a script already availabe in this package. C
 ```
 ./start_sim_ros2_gazebo.sh
 ```
-N.B. Before use this script you have to install *gnome-terminal* to open multiple terminals by script by running on your terminal. Pay also attention to the path for workingspaces in the script, you have to modify them in according with your workingspaces paths
+N.B. Before use this script you have to install *gnome-terminal* to open multiple terminals by script by running on your terminal. Pay also attention to the path for workingspaces in the script, you have to modify them in according with your workingspaces paths starting from the folder within you downloaded the script
 
 ### Simulation on Vrep manually
 To execute this simulation on Vrep instead of Gazebo follow the procedure above replacing *sim_ros2_gazebo.launch* with *sim_ros2_coppelia.launch* in point 3 ( file available in 'main' branch of rt2_assignment1 repository)
@@ -76,4 +76,4 @@ As before you can run the simulation using the script *start_sim_ros2_coppelia.s
 ```
 ./start_sim_ros2_coppelia.sh
 ```
-N.B. Before use this script you have to install *gnome-terminal* to open multiple terminals by script by running on your terminal. Pay also attention to the path for workingspaces in the script, you have to modify them in according with your workingspaces paths, also fro the path of *CoppeliaSim_Edu_V4_2_0_Ubuntu20_04* folder
+N.B. Before use this script you have to install *gnome-terminal* to open multiple terminals by script by running on your terminal. Pay also attention to the path for workingspaces in the script, you have to modify them in according with your workingspaces paths starting from the folder within you downloaded the script. Also  the path of *CoppeliaSim_Edu_V4_2_0_Ubuntu20_04* folder should be modified 
