@@ -85,8 +85,9 @@ class PositionAction():
 		des_yaw = goal.theta
 		change_state(0)
 		
+		rate = rospy.Rate(20)
 			
-		while True:
+		while not rospy.is_shutdown():
 			
 			#if goal canceled or when another goal is set
 			if self.server.is_preempt_requested():
@@ -110,7 +111,8 @@ class PositionAction():
 					self._result.result = True
 					self.server.set_succeeded(self._result)
 					break 
-
+					
+			rate.sleep()
 
 def clbk_odom(msg):
 	"""
