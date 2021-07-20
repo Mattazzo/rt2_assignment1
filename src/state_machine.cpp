@@ -1,8 +1,32 @@
 /**
+ * \file state_machine.cpp
+ * \brief This file implement a state machine that control the robot
+ * \author Matteo Azzini
+ * \version 1.0
+ * \date 23/07/2021
+ * 
+ * \details
+ * 
+ * Publishers to:<BR>
+ * 	° /position_server
+ * 	
+ * Services:<BR>
+ *	° /user_interface
+ * 
+ * Clients:<BR>
+ * 	° /position_server
+ * 
+ * Action Client:<BR>
+ * 	° /position	 	 
+ * 
+ * 
+ * Description:
+ * 
  * State_machine node which controls the robot, interact with random 
  * position service to get a random goal and with position action server 
  * to reach it. This node implemtn also a server for user_command service, 
  * to let user control the robot.
+ * 
  */
 
 #include "ros/ros.h"
@@ -17,15 +41,15 @@
 bool start = false; /*!< variable use to start the robot if it is true */
 
 /**
+ *\brief Server function to gstart and stop robot
+ * 
+ * \param req: server request to start and stop robot random behavior 
+ * \param res: server response
+ * 
+ * \return always true
+ *
  * Function of user interface server, it start or stop the robot depending 
  * on user request 
- * 
- * @param 
- * 			- req: request for the server
- * 			- res: response from the server
- * 
- * @return 	
- * 			- true: always true 
  */
 bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Command::Response &res){
     if (req.command == "start"){
@@ -38,6 +62,13 @@ bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Com
 }
 
 /**
+ *\brief Main function to control robot behavior
+ * 
+ * \param argc: number of argument 
+ * \param argv: pointer to argument vector
+ * 
+ * \return always zero
+ * 
  * Main function with declaration of a server for user_interface service,
  * a client to get a random position and an action client to reach the 
  * desired position. If user requested to start the robot, the node make 
