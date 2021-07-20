@@ -190,6 +190,7 @@ def go_straight_ahead(des_pos):
 	Args:
 		des_pos: goal position to set the right linear velocity
 	"""
+	global kp_d, kp_a
 	desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
 	err_yaw = desired_yaw - yaw_
 	err_pos = math.sqrt(pow(des_pos.y - position_.y, 2) +
@@ -199,7 +200,7 @@ def go_straight_ahead(des_pos):
 
 	if err_pos > dist_precision_:
 		twist_msg = Twist()
-		twist_msg.linear.x = 0.3
+		twist_msg.linear.x = kp_d*0.3
 		if twist_msg.linear.x > ub_d:
 			twist_msg.linear.x = ub_d
 
@@ -245,7 +246,12 @@ def done():
 	twist_msg.linear.x = 0
 	twist_msg.angular.z = 0
 	pub_.publish(twist_msg)
-
+	
+def set_velocities(msg):
+	global kp_d,kp_a
+	
+	kp_d = msg.linear.x 
+	kp_a = -msg.angular.z
 
 
 def main():
@@ -257,6 +263,7 @@ def main():
 	rospy.init_node('go_to_point')
 	pub_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
 	sub_odom = rospy.Subscriber('/odom', Odometry, clbk_odom)
+	sub_vel = rospy.Subscriber('velocities', Twist, set_velocities)
     #service = rospy.Service('/go_to_point', Position, go_to_point)
 	action_server = PositionAction()
 	
