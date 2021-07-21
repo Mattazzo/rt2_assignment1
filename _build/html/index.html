@@ -92,7 +92,7 @@
 <li><a class="reference internal" href="#rt2-assignment1-s-documentation">Rt2_assignment1’s documentation!</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#gotopoint-module">GoToPoint Module</a></li>
+<li><a class="reference internal" href="#module-scripts.go_to_point">GoToPoint Module</a></li>
 <li><a class="reference internal" href="#position-service">Position Service</a></li>
 <li><a class="reference internal" href="#satte-machine">Satte Machine</a></li>
 </ul>
@@ -175,8 +175,170 @@
 <p>This is the documentation of the RT2_assignment package!</p>
 </div>
 </div>
-<div class="section" id="gotopoint-module">
-<h1>GoToPoint Module<a class="headerlink" href="#gotopoint-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-scripts.go_to_point">
+<span id="gotopoint-module"></span><h1>GoToPoint Module<a class="headerlink" href="#module-scripts.go_to_point" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-go_to_point"></span><p>This node implement a ROS Action to let the robot go to a goal position</p>
+<dl class="simple">
+<dt>Publishers to:&lt;BR&gt;</dt><dd><p>/cmd_vel</p>
+</dd>
+<dt>Subscribers to:&lt;BR&gt;</dt><dd><p>/odom
+/velocities</p>
+</dd>
+<dt>Action Server:&lt;BR&gt;</dt><dd><p>/position</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="scripts.go_to_point.PositionAction">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">PositionAction</span></span><a class="reference internal" href="_modules/scripts/go_to_point.html#PositionAction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.PositionAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class definition of the Action server go to point</p>
+<p>…</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scripts.go_to_point.PositionAction._feedback">
+<span class="sig-name descname"><span class="pre">_feedback</span></span><a class="headerlink" href="#scripts.go_to_point.PositionAction._feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>feedback of PositionAction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>PositionFeedback</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="scripts.go_to_point.PositionAction._result">
+<span class="sig-name descname"><span class="pre">_result</span></span><a class="headerlink" href="#scripts.go_to_point.PositionAction._result" title="Permalink to this definition">¶</a></dt>
+<dd><p>result of PositionAction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>PositionResult</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scripts.go_to_point.PositionAction.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#PositionAction.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.PositionAction.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>class constructor</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="scripts.go_to_point.PositionAction.go_to_point">
+<span class="sig-name descname"><span class="pre">go_to_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#PositionAction.go_to_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.PositionAction.go_to_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>implement a state machine to let the robot reach a goal position</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">go_to_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#PositionAction.go_to_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method of the action server, if goal is canceled, robot is stopped.
+Otherwise, if goal is set, it works as a finite state machine with
+4 state:</p>
+<blockquote>
+<div><p>0 - Rotate robot to be headed for the goal
+1 - Go straight ahead
+2 - Robot is in the goal point, rotate to fix the heading
+3 - Goal reached, stop the robot</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>goal</strong> (<em>goal to be reached by the robot</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.go_to_point.change_state">
+<span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">change_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#change_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.change_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to change state for finite state machine in go to poin function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> – state of the finite state machine in go to point function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.go_to_point.clbk_odom">
+<span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">clbk_odom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#clbk_odom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.clbk_odom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function of subscriber for topic /odom, get the position
+and the quaternion of the robot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>msg</strong> – message of type Odometry to get robot position and quaternion</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.go_to_point.done">
+<span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#done"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.done" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to stop the robot</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.go_to_point.fix_final_yaw">
+<span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">fix_final_yaw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">des_yaw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#fix_final_yaw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.fix_final_yaw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to rotate the robot, when he is in the right position, to
+have the goal orientation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>des_yaw</strong> – desired angle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.go_to_point.fix_yaw">
+<span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">fix_yaw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">des_pos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#fix_yaw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.fix_yaw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to rotate the robot to be headed for the goal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>des_pos</strong> – goal position to set the right angular velocity for rotation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.go_to_point.go_straight_ahead">
+<span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">go_straight_ahead</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">des_pos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#go_straight_ahead"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.go_straight_ahead" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to go straight ahead</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>des_pos</strong> – goal position to set the right linear velocity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.go_to_point.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function with declaration of a publisher for /cmd_vel topic, a
+subscriber for <em>/odom</em> topic, an action server for go to point service</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.go_to_point.normalize_angle">
+<span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">normalize_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#normalize_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.normalize_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to normalize an angle</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>angle</strong> – angle to be normalized</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.go_to_point.set_velocities">
+<span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">set_velocities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#set_velocities"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.set_velocities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function set constants to assign velocities</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>msg</strong> – is the twist of /cmd_vel topic</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="position-service">
 <h1>Position Service<a class="headerlink" href="#position-service" title="Permalink to this headline">¶</a></h1>

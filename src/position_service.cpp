@@ -3,18 +3,17 @@
  * \brief This file implement a server to get a random position for the robot
  * \author Matteo Azzini
  * \version 1.0
- * \date 23/07/2021
+ * \date23/07/2021
  * 
- * \details
- * 	
+ * \details 
+ * 
  * Services:<BR>
- *	° /position_server	 
- * 
+ * 	° /position_server
  * 
  * Description:
  * 
- * Position server that return a random position between the bounds specified
- * in the request
+ * Position server that returns a random position between the bounds specified in the request
+ * 
  */
 
 #include "ros/ros.h"

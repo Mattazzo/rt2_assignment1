@@ -114,7 +114,7 @@ int main(int argc, char **argv)
 		status_pub.publish(status);
    		//std::cout<< "status: "<< status << std::endl;
    		
-   		std::cout << "\nGoing to the position: x= " << goal.x << " y= " << goal.y << " theta = " << goal.theta << std::endl;
+   		std::cout << "\nGoing to the position: x= " << goal.x << " y= " << goal.y << " theta = " << goal.theta << << ";status: "<< status <<std::endl;
    		
    		//wait for the action to return
 		bool finished_before_timeout = client_pos.waitForResult(ros::Duration(60.0)); //true if the return is done before timer expire(60 sec), otherwise false
