@@ -31,7 +31,7 @@ Position Service
 .. doxygenfile:: position_service.cpp 
 	:project: rt2_assignment1
 	
-Satte Machine 
+State Machine 
 ================
 
 .. doxygenfile:: state_machine.cpp 
