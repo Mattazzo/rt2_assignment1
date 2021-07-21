@@ -1,4 +1,4 @@
-# rt2_assignment1 - branch raction' - Matteo Azzini 4475165
+# rt2_assignment1 - branch action' - Matteo Azzini 4475165
 
 ## Requirements
 In this branch I was required to write *go_to_point.py* node as an ROS Action server instead of a simple server. Therefore I had also to modify the FSM node in oredr to let it be able to cancel a goal.
