@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_r_e_a_d_m_e_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>rt2_assignment1<sp/>-<sp/>branch<sp/>raction&apos;<sp/>-<sp/>Matteo<sp/>Azzini<sp/>4475165</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Requirements</highlight></codeline>
+<codeline><highlight class="normal">In<sp/>this<sp/>branch<sp/>I<sp/>was<sp/>required<sp/>to<sp/>write<sp/>*go_to_point.py*<sp/>node<sp/>as<sp/>an<sp/>ROS<sp/>Action<sp/>server<sp/>instead<sp/>of<sp/>a<sp/>simple<sp/>server.<sp/>Therefore<sp/>I<sp/>had<sp/>also<sp/>to<sp/>modify<sp/>the<sp/>FSM<sp/>node<sp/>in<sp/>oredr<sp/>to<sp/>let<sp/>it<sp/>be<sp/>able<sp/>to<sp/>cancel<sp/>a<sp/>goal.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Package<sp/>Composition</highlight></codeline>
+<codeline><highlight class="normal">The<sp/>package<sp/>contains<sp/>the<sp/>folllowing<sp/>elements:&lt;/br&gt;</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**action**:<sp/>folder<sp/>with<sp/>.action<sp/>file<sp/>to<sp/>define<sp/>an<sp/>action&lt;/br&gt;</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**doc**:<sp/>folder<sp/>with<sp/>documentation<sp/>about<sp/>the<sp/>package,<sp/>generated<sp/>with<sp/>doxygen<sp/>&lt;/br&gt;</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**include**:<sp/>folder<sp/>required<sp/>for<sp/>a<sp/>ROS2<sp/>package<sp/>&lt;/br&gt;</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**launch**:<sp/>folder<sp/>with<sp/>a<sp/>launch<sp/>files<sp/>to<sp/>start<sp/>the<sp/>simulation<sp/>both<sp/>on<sp/>Gazebo<sp/>and<sp/>Vrep&lt;/br&gt;</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**src**:<sp/>folder<sp/>with<sp/>the<sp/>nodes<sp/>written<sp/>in<sp/>cpp<sp/>&lt;/br&gt;</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**urdf:**:<sp/>folder<sp/>with<sp/>info<sp/>about<sp/>the<sp/>robot<sp/>to<sp/>spawn<sp/>it<sp/>in<sp/>Gazebo<sp/>simulation<sp/></highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**srv**:<sp/>folder<sp/>with<sp/>.srv<sp/>files<sp/>to<sp/>define<sp/>the<sp/>services&lt;/br&gt;</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**CMakeList.txt**:<sp/>file<sp/>required<sp/>to<sp/>build<sp/>the<sp/>pacakge&lt;/br&gt;</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**pacakage.xml**:<sp/>file<sp/>required<sp/>to<sp/>build<sp/>the<sp/>package&lt;/br&gt;</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**scene.ttt**:<sp/>Vrep<sp/>scene<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Code<sp/>Explanation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Launch<sp/>files</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**sim.launch**:<sp/>file<sp/>to<sp/>start<sp/>the<sp/>simulation<sp/>on<sp/>Gazebo<sp/></highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**sim_coppelia.launch**:<sp/>file<sp/>to<sp/>start<sp/>the<sp/>simulation<sp/>on<sp/>Vrep</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Scripts</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**go_to_point.py**:<sp/>Action<sp/>server<sp/>to<sp/>let<sp/>the<sp/>robot<sp/>reach<sp/>the<sp/>goal<sp/>position.<sp/>It<sp/>works<sp/>as<sp/>a<sp/>finite<sp/>state<sp/>machine,<sp/>when<sp/>a<sp/>goal<sp/>position<sp/>is<sp/>received,<sp/>it<sp/>fixs<sp/>robot<sp/>yaw,<sp/>go<sp/>straight<sp/>to<sp/>the<sp/>point<sp/>and<sp/>then<sp/>rotate<sp/>to<sp/>have<sp/>its<sp/>heading<sp/>like<sp/>the<sp/>desired<sp/>yaw,<sp/>so<sp/>goal<sp/>is<sp/>reached.<sp/>If<sp/>the<sp/>goal<sp/>is<sp/>canceled<sp/>in<sp/>the<sp/>meanwhile<sp/>robot<sp/>is<sp/>moving,<sp/>server<sp/>is<sp/>preempted<sp/>and<sp/>so<sp/>robot<sp/>is<sp/>stopped.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**user_interface.py**:<sp/>ROS<sp/>node<sp/>to<sp/>let<sp/>user<sp/>command<sp/>the<sp/>robot,<sp/>it<sp/>has<sp/>a<sp/>client<sp/>for<sp/>Command<sp/>service<sp/>and<sp/>an<sp/>action<sp/>client<sp/>for<sp/>RandomPosition<sp/>service.<sp/>When<sp/>user<sp/>press<sp/>1<sp/>robot<sp/>it<sp/>makes<sp/>a<sp/>request<sp/>to<sp/>*state_machine.cpp*<sp/>and<sp/>robot<sp/>start<sp/>moving,<sp/>otherwise,<sp/>if<sp/>he<sp/>press<sp/>0,<sp/>there<sp/>is<sp/>a<sp/>request<sp/>for<sp/>COmmand<sp/>server<sp/>to<sp/>stop<sp/>the<sp/>*state_machine.cpp*<sp/>node,<sp/>but<sp/>also<sp/>an<sp/>action<sp/>request<sp/>*cancell_all_goals()*<sp/>to<sp/>cancel<sp/>the<sp/>goal<sp/>for<sp/>the<sp/>robot<sp/>and<sp/>stop<sp/>it<sp/>as<sp/>soon<sp/>as<sp/>possible.<sp/><sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>src</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**state_machine.cpp**:<sp/>ROS<sp/>node<sp/>with<sp/>a<sp/>server<sp/>for<sp/>Command<sp/>service,<sp/>a<sp/>client<sp/>fro<sp/>RandomPosition<sp/>service<sp/>and<sp/>an<sp/>action<sp/>client<sp/>for<sp/>Position<sp/>service.<sp/>When<sp/>the<sp/>server<sp/>receives<sp/>a<sp/>&quot;start&quot;<sp/>command,<sp/>it<sp/>sets<sp/>a<sp/>variable<sp/>start<sp/>to<sp/>true<sp/>and<sp/>the<sp/>main<sp/>function<sp/>has<sp/>a<sp/>loop<sp/>that<sp/>request<sp/>a<sp/>random<sp/>goal<sp/>position,<sp/>then<sp/>send<sp/>it<sp/>as<sp/>a<sp/>goal<sp/>for<sp/>the<sp/>action<sp/>server<sp/>*go_to_point.py*<sp/>in<sp/>order<sp/>to<sp/>reach<sp/>the<sp/>goal.<sp/>If<sp/>the<sp/>goal<sp/>is<sp/>reached<sp/>before<sp/>30<sp/>seconds<sp/>it<sp/>prints<sp/>the<sp/>status<sp/>SUCCEDEED,<sp/>if<sp/>the<sp/>goal<sp/>is<sp/>canceled<sp/>it<sp/>prints<sp/>the<sp/>status<sp/>PREEMPTED,<sp/>otherwise<sp/>if<sp/>timer<sp/>expires<sp/>before<sp/>reaching<sp/>the<sp/>goal,<sp/>it<sp/>prints<sp/>a<sp/>message<sp/>to<sp/>inform<sp/>user<sp/>that<sp/>action<sp/>is<sp/>not<sp/>finisched<sp/>in<sp/>time</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**position_server.cpp**:<sp/>implements<sp/>a<sp/>ROS<sp/>server<sp/>which<sp/>receives<sp/>as<sp/>request<sp/>the<sp/>minimum<sp/>and<sp/>maximum<sp/>value,<sp/>within<sp/>choose<sp/>x<sp/>and<sp/>y<sp/>coordinates.<sp/>As<sp/>response<sp/>returns<sp/>random<sp/>x,<sp/>y<sp/>coordinates<sp/>and<sp/>the<sp/>heading<sp/>theta<sp/>for<sp/>a<sp/>goal<sp/>position</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>srv</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Command.srv**:<sp/>Definition<sp/>of<sp/>Command<sp/>service<sp/>used<sp/>to<sp/>send<sp/>a<sp/>command<sp/>to<sp/>control<sp/>the<sp/>robot<sp/><sp/>&lt;/br&gt;</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Position.srv**:<sp/>Definition<sp/>of<sp/>Position<sp/>service<sp/>used<sp/>to<sp/>reach<sp/>a<sp/>goal<sp/>position&lt;/br&gt;</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**RandomPosition.srv**:<sp/>Definition<sp/>of<sp/>RandomPosition<sp/>used<sp/>to<sp/>get<sp/>a<sp/>random<sp/>goal<sp/>position&lt;/br&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>How<sp/>to<sp/>execute<sp/>the<sp/>code</highlight></codeline>
+<codeline><highlight class="normal">###<sp/>Simulation<sp/>on<sp/>Gazebo<sp/></highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>Download<sp/>and<sp/>build<sp/>this<sp/>package<sp/>in<sp/>the<sp/>src<sp/>folder<sp/>of<sp/>your<sp/>ROS<sp/>worksapace</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>Launch<sp/>the<sp/>simulation<sp/>executing<sp/>the<sp/>following<sp/>command<sp/>in<sp/>your<sp/>ROS<sp/>worksapce</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">roslaunch<sp/>rt2_assignment1<sp/>sim.launch</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">N.B.<sp/>Remeber<sp/>to<sp/>source<sp/>your<sp/>ROS<sp/>workspace<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Simulation<sp/>on<sp/>Vrep<sp/></highlight></codeline>
+<codeline><highlight class="normal">Repeate<sp/>points<sp/>1<sp/>and<sp/>2<sp/>as<sp/>before,<sp/>but<sp/>with<sp/>a<sp/>different<sp/>launch<sp/>file</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">roslaunch<sp/>rt2_assignemnt1<sp/>sim_coppelia.launch</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">Then<sp/>in<sp/>another<sp/>terminal<sp/>you<sp/>need<sp/>to<sp/>source<sp/>again<sp/>the<sp/>ROS<sp/>environment,<sp/>than<sp/>go<sp/>into<sp/>*CoppeliaSim_Edu_V4_2_0_Ubuntu20_04*<sp/>folder<sp/>(<sp/>available<sp/>at<sp/>this<sp/>link<sp/>http://www.coppeliarobotics.com/downloads.html<sp/>)<sp/>and<sp/>excute<sp/></highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">./coppeliaSim.sh</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">The<sp/>Vrep<sp/>GUI<sp/>will<sp/>start,<sp/>from<sp/>here<sp/>you<sp/>need<sp/>to<sp/>open<sp/>the<sp/>vrep<sp/>scene<sp/>*scene.ttt*<sp/>available<sp/>in<sp/>this<sp/>branch<sp/>and<sp/>start<sp/>the<sp/>simulation<sp/>with<sp/>the<sp/>play<sp/>button</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="README.md"/>
+  </compounddef>
+</doxygen>

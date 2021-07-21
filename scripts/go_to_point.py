@@ -1,24 +1,24 @@
 #! /usr/bin/env python
 
-## @package rt2_assignment1
-# \file go_to_point.py
-# \brief this Ros node implement an Action Server to let the robot reach a goal
-# \author Matteo Azzini
-# \version 1.0
-# \date 23/07/2021
-#
-# \details 
-#	Publishers to:<BR>
-#		/cmd_vel
-#
-#	Subscribers to:<BR> 
-#		/odom
-#		/velocities
-#	
-#	Action Server :<BR>
-#		/position
-#
-#This node implement a ROS Action to let the robot go to a goal position 
+"""
+.. module:: go_to_point
+	:platform: Unix
+	:synopsis: Python module to reach a goal position
+	
+.. moduleauthor: Matteo Azzin matteoazzini1999@gmail.com
+
+This node implement a ROS Action to let the robot go to a goal position
+
+Publishers to:<BR>
+	/cmd_vel
+	
+Subscribers to:<BR>
+	/odom
+	/velocities
+	
+Action Server:<BR>
+	/position
+"""
 
 import rospy
 from geometry_msgs.msg import Twist, Point
@@ -32,43 +32,42 @@ import rt2_assignment1.msg #import PositionAction
 
 # robot state variables
 position_ = Point()	
-yaw_ = 0
-position_ = 0
-state_ = 0
-pub_ = None
+yaw_ = 0			
+position_ = 0		
+state_ = 0				
+pub_ = None				
 
 # parameters for control
-yaw_precision_ = math.pi / 9  # +/- 20 degree allowed
-yaw_precision_2_ = math.pi / 90  # +/- 2 degree allowed
-dist_precision_ = 0.1
-kp_a = -3.0 
-kp_d = 0.2
-ub_a = 0.6
-lb_a = -0.5
-ub_d = 0.6
+yaw_precision_ = math.pi / 9		
+yaw_precision_2_ = math.pi / 90	
+dist_precision_ = 0.1				
+kp_a = -3.0
+kp_d = 0.2							
+ub_a = 0.6							
+lb_a = -0.5							
+ub_d = 0.6							
 
-##
-# \class PositionAction
-#\brief This class implement a Ros Action Server to let robot reach a goal position
-#
-#Class definition of the Action server go to point
-#	
-#	...
-#	
-#	Attributes
-#	----------	
-#	_feedback: PositionFeedback
-#		feedback of PositionAction
-#	_result: PositionResult
-#		result of PositionAction
-#		
-#	Methods
-#	----------	
-#	__init__(self)
-#		class constructor
-#	go_to_point(self, goal)	
-#		implement a state machine to let the robot reach a goal position
+
 class PositionAction():
+	"""
+	Class definition of the Action server go to point
+	
+	...
+	
+	Attributes
+	----------	
+	_feedback: PositionFeedback
+		feedback of PositionAction
+	_result: PositionResult
+		result of PositionAction
+		
+	Methods
+	----------	
+	__init__(self)
+		class constructor
+	go_to_point(self, goal)	
+		implement a state machine to let the robot reach a goal position
+	"""
 	
 	# create messages that are used to publish feedback/result
 	_feedback = rt2_assignment1.msg.PositionFeedback()
@@ -80,20 +79,21 @@ class PositionAction():
 		self.server = actionlib.SimpleActionServer('position', rt2_assignment1.msg.PositionAction, self.go_to_point, auto_start = False)
 		self.server.start()
 	
-	## 
-	# \brief Function to reach a goal position
-	#
-	# \param self is the object pointer
-	# \param goal is the goal position to reach 
-	#
-	# Method of the action server, if goal is canceled, robot is stopped.
-	#	Otherwise, if goal is set, it works as a finite state machine with
-	#	4 state:
-	#		0 - Rotate robot to be headed for the goal
-	#		1 - Go straight ahead
-	#		2 - Robot is in the goal point, rotate to fix the heading
-	#		3 - Goal reached, stop the robot 	
+
 	def go_to_point(self, goal):
+		"""
+		Method of the action server, if goal is canceled, robot is stopped.
+		Otherwise, if goal is set, it works as a finite state machine with
+		4 state:
+			0 - Rotate robot to be headed for the goal
+			1 - Go straight ahead
+			2 - Robot is in the goal point, rotate to fix the heading
+			3 - Goal reached, stop the robot 
+			
+		Parameters
+		----------
+			goal: goal to be reached by the robot
+		"""
 		
 		#helper variable 
 		success = True
@@ -133,14 +133,15 @@ class PositionAction():
 					
 			rate.sleep()
 
-## 
-# \brief /odom callback function
-#
-# \param msg is the message of type Odometry to get robot position and quaternion
-#
-# Callback function of subscriber for topic /odom, get the position 
-# and the quaternion of the robot	
+	
 def clbk_odom(msg):
+	"""
+	Callback function of subscriber for topic /odom, get the position 
+	and the quaternion of the robot
+	
+	Args:
+		msg: message of type Odometry to get robot position and quaternion
+	"""
 	global position_
 	global yaw_
 
@@ -156,37 +157,40 @@ def clbk_odom(msg):
 	euler = transformations.euler_from_quaternion(quaternion)
 	yaw_ = euler[2]
 
-## 
-# \brief Function to change robot state
-#
-# \param state of the finite state machine in go to point function
-#
-# Function to change state for finite state machine in go to poin function
+
 def change_state(state):
+	"""
+	Function to change state for finite state machine in go to poin function
+	
+	Args:
+		state: state of the finite state machine in go to point function
+	"""
 
 	global state_
 	state_ = state
 	print ('State changed to [%s]' % state_)
 	
-## 
-# \brief Function normalize an angle
-#
-# \param angle to be normalized
-#
-# Function to change state for finite state machine in go to poin function
+
 def normalize_angle(angle):
+	"""
+	Function to normalize an angle
+	
+	Args:
+		angle: angle to be normalized
+	"""
 	
 	if(math.fabs(angle) > math.pi):
 		angle = angle - (2 * math.pi * angle) / (math.fabs(angle))
 	return angle
 
-## 
-# \brief Function to rotate the robot to be headed for the goal
-#
-# \param des_pos is the goal position to set the right angular velocity for rotation
-#
-# Function to rotate the robot to be headed for the goal
+
 def fix_yaw(des_pos):
+	"""
+	Function to rotate the robot to be headed for the goal
+	
+	Args:
+		des_pos: goal position to set the right angular velocity for rotation
+	"""
 	
 	desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
 	err_yaw = normalize_angle(desired_yaw - yaw_)
@@ -204,15 +208,16 @@ def fix_yaw(des_pos):
 		#print ('Yaw error: [%s]' % err_yaw)
 		change_state(1)
 
-## 
-# \brief Function to go straight ahead to the goal
-#
-# \param des_pos is the goal position to set the right angular velocity for rotation
-#
-# Function to go straight ahead to the goal
-def go_straight_ahead(des_pos):
 
+def go_straight_ahead(des_pos):
+	"""
+	Function to go straight ahead
+	
+	Args:
+		des_pos: goal position to set the right linear velocity
+	"""
 	global kp_d, kp_a
+	
 	desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
 	err_yaw = desired_yaw - yaw_
 	err_pos = math.sqrt(pow(des_pos.y - position_.y, 2) +
@@ -237,13 +242,15 @@ def go_straight_ahead(des_pos):
 		#print ('Yaw error: [%s]' % err_yaw)
 		change_state(0)
 
-## 
-# \brief Function to match goal orientation
-# \param des_yaw is the desired angle 
-#
-# Function to rotate the robot to 
-# have the goal orientation, when he is in the goal position
+
 def fix_final_yaw(des_yaw):
+	"""
+	Function to rotate the robot, when he is in the right position, to 
+	have the goal orientation
+	
+	Args:
+		des_yaw: desired angle 
+	"""
 
 	err_yaw = normalize_angle(des_yaw - yaw_)
 	rospy.loginfo(err_yaw)
@@ -261,33 +268,35 @@ def fix_final_yaw(des_yaw):
 		change_state(3)
 
 
-## 
-# \brief Function to stop the robot	
-#
-# Function to stop the robot		
+	
 def done():
-
+	"""
+	Function to stop the robot
+	"""
 	twist_msg = Twist()
 	twist_msg.linear.x = 0
 	twist_msg.angular.z = 0
 	pub_.publish(twist_msg)
 
-## 
-# \brief Function set constants to assign velocities	
-#
-# Callback function oof topic /velocities to set constants to assign velocities
-def set_velocities(msg):
-
-	global kp_d,kp_a
 	
-	kp_d = msg.linear.x 
-	kp_a = -msg.angular.z
+def set_velocities(msg):
+	"""
+	Function set constants to assign velocities
+	
+	Args:
+		msg: is the twist of /cmd_vel topic
+	"""
+	global kp_d, kp_a
+	
+	kp_d = msg.linear.x
+	kp_a = msg.angular.z
 
 
-##
-# Main function with declaration of a publisher for /cmd_vel topic, a 
-# subscriber for /odom topic, an action server for go to point service
 def main():
+	"""
+	Main function with declaration of a publisher for /cmd_vel topic, a 
+	subscriber for */odom* topic, an action server for go to point service
+	"""
 	global pub_
 	rospy.init_node('go_to_point')
 	pub_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
