@@ -288,6 +288,7 @@ def set_velocities(msg):
 	"""
 	global kp_d, kp_a
 	
+	#set velocities
 	kp_d = msg.linear.x
 	kp_a = msg.angular.z
 
