@@ -75,18 +75,14 @@ $(function() {
 <div class="title">go_to_point.PositionAction Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>This class implement a Ros Action Server to let robot reach a goal position.  
- <a href="classgo__to__point_1_1_position_action.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abc7501764e5c7d64c959656b883d76f2"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgo__to__point_1_1_position_action.html#abc7501764e5c7d64c959656b883d76f2">__init__</a> (self)</td></tr>
 <tr class="memdesc:abc7501764e5c7d64c959656b883d76f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor.  <a href="classgo__to__point_1_1_position_action.html#abc7501764e5c7d64c959656b883d76f2">More...</a><br /></td></tr>
 <tr class="separator:abc7501764e5c7d64c959656b883d76f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78b25d45617ea2b5b83c94cea1106154"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgo__to__point_1_1_position_action.html#a78b25d45617ea2b5b83c94cea1106154">go_to_point</a> (self, goal)</td></tr>
-<tr class="memdesc:a78b25d45617ea2b5b83c94cea1106154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to reach a goal position.  <a href="classgo__to__point_1_1_position_action.html#a78b25d45617ea2b5b83c94cea1106154">More...</a><br /></td></tr>
-<tr class="separator:a78b25d45617ea2b5b83c94cea1106154"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71bda06bef30c8083f38a9ee57d8375d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgo__to__point_1_1_position_action.html#a71bda06bef30c8083f38a9ee57d8375d">action_fun</a> (self, goal)</td></tr>
+<tr class="separator:a71bda06bef30c8083f38a9ee57d8375d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -94,8 +90,9 @@ Public Attributes</h2></td></tr>
 <tr class="separator:aa342355de7bf27d3f2e978b06028cfad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class implement a Ros Action Server to let robot reach a goal position. </p>
-<p>Class definition of the Action server go to point </p><pre class="fragment">...
+<div class="textblock"><pre class="fragment">Class definition of the Action server go to point
+
+...
 
 Attributes
 ----------  
@@ -103,7 +100,7 @@ _feedback: PositionFeedback
     feedback of PositionAction
 _result: PositionResult
     result of PositionAction
-
+    
 Methods
 ----------  
 __init__(self)
@@ -132,14 +129,14 @@ go_to_point(self, goal)
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a78b25d45617ea2b5b83c94cea1106154"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78b25d45617ea2b5b83c94cea1106154">&#9670;&nbsp;</a></span>go_to_point()</h2>
+<a id="a71bda06bef30c8083f38a9ee57d8375d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71bda06bef30c8083f38a9ee57d8375d">&#9670;&nbsp;</a></span>action_fun()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">def go_to_point.PositionAction.go_to_point </td>
+          <td class="memname">def go_to_point.PositionAction.action_fun </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em>, </td>
@@ -157,18 +154,18 @@ go_to_point(self, goal)
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Function to reach a goal position. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">self</td><td>is the object pointer </td></tr>
-    <tr><td class="paramname">goal</td><td>is the goal position to reach</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Method of the action server, if goal is canceled, robot is stopped. Otherwise, if goal is set, it works as a finite state machine with 4 state: 0 - Rotate robot to be headed for the goal 1 - Go straight ahead 2 - Robot is in the goal point, rotate to fix the heading 3 - Goal reached, stop the robot <br  />
- </p>
-
+<pre class="fragment">Method of the action server, if goal is canceled, robot is stopped.
+Otherwise, if goal is set, it works as a finite state machine with
+4 state:
+    0 - Rotate robot to be headed for the goal
+    1 - Go straight ahead
+    2 - Robot is in the goal point, rotate to fix the heading
+    3 - Goal reached, stop the robot 
+    
+Parameters
+----------
+    goal: goal to be reached by the robot
+</pre> 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>

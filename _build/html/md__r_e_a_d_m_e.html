@@ -64,12 +64,12 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title"><a class="el" href="namespacert2__assignment1.html">rt2_assignment1</a> - branch raction' - Matteo Azzini 4475165 </div>  </div>
+<div class="title">rt2_assignment1 - branch raction' - Matteo Azzini 4475165 </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
 Requirements</h1>
-<p>In this branch I was required to write <em><a class="el" href="go__to__point_8py.html" title="this Ros node implement an Action Server to let the robot reach a goal">go_to_point.py</a></em> node as an ROS Action server instead of a simple server. Therefore I had also to modify the FSM node in oredr to let it be able to cancel a goal.</p>
+<p>In this branch I was required to write <em><a class="el" href="go__to__point_8py.html">go_to_point.py</a></em> node as an ROS Action server instead of a simple server. Therefore I had also to modify the FSM node in oredr to let it be able to cancel a goal.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Package Composition</h1>
 <p>The package contains the folllowing elements:</p><ul>
@@ -95,14 +95,14 @@ Launch files</h2>
 <h2><a class="anchor" id="autotoc_md5"></a>
 Scripts</h2>
 <ul>
-<li><b><a class="el" href="go__to__point_8py.html" title="this Ros node implement an Action Server to let the robot reach a goal">go_to_point.py</a></b>: Action server to let the robot reach the goal position. It works as a finite state machine, when a goal position is received, it fixs robot yaw, go straight to the point and then rotate to have its heading like the desired yaw, so goal is reached. If the goal is canceled in the meanwhile robot is moving, server is preempted and so robot is stopped.</li>
+<li><b><a class="el" href="go__to__point_8py.html">go_to_point.py</a></b>: Action server to let the robot reach the goal position. It works as a finite state machine, when a goal position is received, it fixs robot yaw, go straight to the point and then rotate to have its heading like the desired yaw, so goal is reached. If the goal is canceled in the meanwhile robot is moving, server is preempted and so robot is stopped.</li>
 <li><b>user_interface.py</b>: ROS node to let user command the robot, it has a client for Command service and an action client for RandomPosition service. When user press 1 robot it makes a request to <em><a class="el" href="state__machine_8cpp.html" title="This file implement a state machine that control the robot.">state_machine.cpp</a></em> and robot start moving, otherwise, if he press 0, there is a request for COmmand server to stop the <em><a class="el" href="state__machine_8cpp.html" title="This file implement a state machine that control the robot.">state_machine.cpp</a></em> node, but also an action request <em>cancell_all_goals()</em> to cancel the goal for the robot and stop it as soon as possible. <br  />
 </li>
 </ul>
 <h2><a class="anchor" id="autotoc_md6"></a>
 src</h2>
 <ul>
-<li><b><a class="el" href="state__machine_8cpp.html" title="This file implement a state machine that control the robot.">state_machine.cpp</a></b>: ROS node with a server for Command service, a client fro RandomPosition service and an action client for Position service. When the server receives a "start" command, it sets a variable start to true and the main function has a loop that request a random goal position, then send it as a goal for the action server <em><a class="el" href="go__to__point_8py.html" title="this Ros node implement an Action Server to let the robot reach a goal">go_to_point.py</a></em> in order to reach the goal. If the goal is reached before 30 seconds it prints the status SUCCEDEED, if the goal is canceled it prints the status PREEMPTED, otherwise if timer expires before reaching the goal, it prints a message to inform user that action is not finisched in time</li>
+<li><b><a class="el" href="state__machine_8cpp.html" title="This file implement a state machine that control the robot.">state_machine.cpp</a></b>: ROS node with a server for Command service, a client fro RandomPosition service and an action client for Position service. When the server receives a "start" command, it sets a variable start to true and the main function has a loop that request a random goal position, then send it as a goal for the action server <em><a class="el" href="go__to__point_8py.html">go_to_point.py</a></em> in order to reach the goal. If the goal is reached before 30 seconds it prints the status SUCCEDEED, if the goal is canceled it prints the status PREEMPTED, otherwise if timer expires before reaching the goal, it prints a message to inform user that action is not finisched in time</li>
 <li><b>position_server.cpp</b>: implements a ROS server which receives as request the minimum and maximum value, within choose x and y coordinates. As response returns random x, y coordinates and the heading theta for a goal position</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md7"></a>

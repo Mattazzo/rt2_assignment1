@@ -184,24 +184,18 @@
           <defname>msg</defname>
         </param>
         <briefdescription>
-<para>/odom callback function </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>msg</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>is the message of type Odometry to get robot position and quaternion</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-Callback function of subscriber for topic /odom, get the position and the quaternion of the robot <linebreak/>
- </para>
+<para><verbatim>Callback function of subscriber for topic /odom, get the position 
+and the quaternion of the robot
+
+Args:
+    msg: message of type Odometry to get robot position and quaternion
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="scripts/go_to_point.py" line="143" column="1" bodyfile="scripts/go_to_point.py" bodystart="143" bodyend="158"/>
+        <location file="scripts/go_to_point.py" line="137" column="1" bodyfile="scripts/go_to_point.py" bodystart="137" bodyend="160"/>
       </memberdef>
       <memberdef kind="function" id="namespacego__to__point_1a31ee48e5cae36821049b572a96b7c8be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -213,23 +207,17 @@ Callback function of subscriber for topic /odom, get the position and the quater
           <defname>state</defname>
         </param>
         <briefdescription>
-<para>Function to change robot state. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>state</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>of the finite state machine in go to point function</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-Function to change state for finite state machine in go to poin function </para>
+<para><verbatim>Function to change state for finite state machine in go to poin function
+
+Args:
+    state: state of the finite state machine in go to point function
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="scripts/go_to_point.py" line="165" column="1" bodyfile="scripts/go_to_point.py" bodystart="165" bodyend="170"/>
+        <location file="scripts/go_to_point.py" line="161" column="1" bodyfile="scripts/go_to_point.py" bodystart="161" bodyend="173"/>
       </memberdef>
       <memberdef kind="function" id="namespacego__to__point_1ac688bb56fa84763ea2edefc30cae032a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -241,23 +229,17 @@ Function to change state for finite state machine in go to poin function </para>
           <defname>angle</defname>
         </param>
         <briefdescription>
-<para>Function normalize an angle. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>angle</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>to be normalized</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-Function to change state for finite state machine in go to poin function </para>
+<para><verbatim>Function to normalize an angle
+
+Args:
+    angle: angle to be normalized
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="scripts/go_to_point.py" line="177" column="1" bodyfile="scripts/go_to_point.py" bodystart="177" bodyend="182"/>
+        <location file="scripts/go_to_point.py" line="174" column="1" bodyfile="scripts/go_to_point.py" bodystart="174" bodyend="186"/>
       </memberdef>
       <memberdef kind="function" id="namespacego__to__point_1a9c3011a3065fcbefcc1c5ad8c9979669" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -269,23 +251,17 @@ Function to change state for finite state machine in go to poin function </para>
           <defname>des_pos</defname>
         </param>
         <briefdescription>
-<para>Function to rotate the robot to be headed for the goal. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>des_pos</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>is the goal position to set the right angular velocity for rotation</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-Function to rotate the robot to be headed for the goal </para>
+<para><verbatim>Function to rotate the robot to be headed for the goal
+
+Args:
+    des_pos: goal position to set the right angular velocity for rotation
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="scripts/go_to_point.py" line="189" column="1" bodyfile="scripts/go_to_point.py" bodystart="189" bodyend="206"/>
+        <location file="scripts/go_to_point.py" line="187" column="1" bodyfile="scripts/go_to_point.py" bodystart="187" bodyend="211"/>
       </memberdef>
       <memberdef kind="function" id="namespacego__to__point_1ac8579665c0fbf665f734476554fac37d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -297,23 +273,17 @@ Function to rotate the robot to be headed for the goal </para>
           <defname>des_pos</defname>
         </param>
         <briefdescription>
-<para>Function to go straight ahead to the goal. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>des_pos</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>is the goal position to set the right angular velocity for rotation</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-Function to go straight ahead to the goal </para>
+<para><verbatim>Function to go straight ahead
+
+Args:
+    des_pos: goal position to set the right linear velocity
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="scripts/go_to_point.py" line="213" column="1" bodyfile="scripts/go_to_point.py" bodystart="213" bodyend="239"/>
+        <location file="scripts/go_to_point.py" line="212" column="1" bodyfile="scripts/go_to_point.py" bodystart="212" bodyend="245"/>
       </memberdef>
       <memberdef kind="function" id="namespacego__to__point_1a4a406386ca62830c19c93949e923f7bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -325,23 +295,18 @@ Function to go straight ahead to the goal </para>
           <defname>des_yaw</defname>
         </param>
         <briefdescription>
-<para>Function to match goal orientation. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>des_yaw</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>is the desired angle</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-Function to rotate the robot to have the goal orientation, when he is in the goal position </para>
+<para><verbatim>Function to rotate the robot, when he is in the right position, to 
+have the goal orientation
+
+Args:
+    des_yaw: desired angle 
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="scripts/go_to_point.py" line="246" column="1" bodyfile="scripts/go_to_point.py" bodystart="246" bodyend="263"/>
+        <location file="scripts/go_to_point.py" line="246" column="1" bodyfile="scripts/go_to_point.py" bodystart="246" bodyend="271"/>
       </memberdef>
       <memberdef kind="function" id="namespacego__to__point_1ac2587220a4ac9c845bc9c5b0b45d5835" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -349,16 +314,14 @@ Function to rotate the robot to have the goal orientation, when he is in the goa
         <argsstring>()</argsstring>
         <name>done</name>
         <briefdescription>
-<para>Function to stop the robot <linebreak/>
- </para>
         </briefdescription>
         <detaileddescription>
-<para>Function to stop the robot <linebreak/>
- </para>
+<para><verbatim>Function to stop the robot
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="scripts/go_to_point.py" line="268" column="1" bodyfile="scripts/go_to_point.py" bodystart="268" bodyend="274"/>
+        <location file="scripts/go_to_point.py" line="272" column="1" bodyfile="scripts/go_to_point.py" bodystart="272" bodyend="281"/>
       </memberdef>
       <memberdef kind="function" id="namespacego__to__point_1ae5adf65cf67db55213cd0ddb439a34f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -370,14 +333,17 @@ Function to rotate the robot to have the goal orientation, when he is in the goa
           <defname>msg</defname>
         </param>
         <briefdescription>
-<para>Function set constants to assign velocities. </para>
         </briefdescription>
         <detaileddescription>
-<para>Callback function oof topic /velocities to set constants to assign velocities </para>
+<para><verbatim>Function set constants to assign velocities
+
+Args:
+    msg: is the twist of /cmd_vel topic
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="scripts/go_to_point.py" line="279" column="1" bodyfile="scripts/go_to_point.py" bodystart="279" bodyend="286"/>
+        <location file="scripts/go_to_point.py" line="282" column="1" bodyfile="scripts/go_to_point.py" bodystart="282" bodyend="295"/>
       </memberdef>
       <memberdef kind="function" id="namespacego__to__point_1ab92bd6db1ec323a4d795ed6cb40aebe1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -385,18 +351,38 @@ Function to rotate the robot to have the goal orientation, when he is in the goa
         <argsstring>()</argsstring>
         <name>main</name>
         <briefdescription>
-<para>Main function with declaration of a publisher for /cmd_vel topic, a subscriber for /odom topic, an action server for go to point service. </para>
         </briefdescription>
         <detaileddescription>
+<para><verbatim>Main function with declaration of a publisher for /cmd_vel topic, a 
+subscriber for */odom* topic, an action server for go to point service
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="scripts/go_to_point.py" line="290" column="1" bodyfile="scripts/go_to_point.py" bodystart="290" bodyend="300"/>
+        <location file="scripts/go_to_point.py" line="296" column="1" bodyfile="scripts/go_to_point.py" bodystart="296" bodyend="310"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
+<para><verbatim>.. module:: go_to_point
+    :platform: Unix
+    :synopsis: Python module to reach a goal position
+    
+.. moduleauthor: Matteo Azzin matteoazzini1999@gmail.com
+
+This node implement a ROS Action to let the robot go to a goal position
+
+Publishers to:&lt;BR&gt;
+    /cmd_vel
+    
+Subscribers to:&lt;BR&gt;
+    /odom
+    /velocities
+    
+Action Server:&lt;BR&gt;
+    /position
+</verbatim> </para>
     </detaileddescription>
     <location file="scripts/go_to_point.py" line="1" column="1"/>
   </compounddef>

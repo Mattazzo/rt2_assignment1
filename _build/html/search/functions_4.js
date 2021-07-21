@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['go_5fstraight_5fahead_72',['go_straight_ahead',['../namespacego__to__point.html#ac8579665c0fbf665f734476554fac37d',1,'go_to_point']]],
-  ['go_5fto_5fpoint_73',['go_to_point',['../classgo__to__point_1_1_position_action.html#a78b25d45617ea2b5b83c94cea1106154',1,'go_to_point::PositionAction']]]
+  ['fix_5ffinal_5fyaw_70',['fix_final_yaw',['../namespacego__to__point.html#a4a406386ca62830c19c93949e923f7bd',1,'go_to_point']]],
+  ['fix_5fyaw_71',['fix_yaw',['../namespacego__to__point.html#a9c3011a3065fcbefcc1c5ad8c9979669',1,'go_to_point']]]
 ];

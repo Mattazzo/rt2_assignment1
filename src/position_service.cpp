@@ -1,5 +1,5 @@
 /**
- * \file position_server.cpp
+ * \file position_service.cpp
  * \brief This file implement a server to get a random position for the robot
  * \author Matteo Azzini
  * \version 1.0

@@ -230,11 +230,11 @@
 	<span class="c1">## The constructor</span>
 <div class="viewcode-block" id="PositionAction.__init__"><a class="viewcode-back" href="../../index.html#scripts.go_to_point.PositionAction.__init__">[docs]</a>	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;Constructor&quot;&quot;&quot;</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">actionlib</span><span class="o">.</span><span class="n">SimpleActionServer</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">,</span> <span class="n">rt2_assignment1</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">PositionAction</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">go_to_point</span><span class="p">,</span> <span class="n">auto_start</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">actionlib</span><span class="o">.</span><span class="n">SimpleActionServer</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">,</span> <span class="n">rt2_assignment1</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">PositionAction</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_fun</span><span class="p">,</span> <span class="n">auto_start</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
 	
 
-<div class="viewcode-block" id="PositionAction.go_to_point"><a class="viewcode-back" href="../../index.html#scripts.go_to_point.PositionAction.go_to_point">[docs]</a>	<span class="k">def</span> <span class="nf">go_to_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal</span><span class="p">):</span>
+<div class="viewcode-block" id="PositionAction.action_fun"><a class="viewcode-back" href="../../index.html#scripts.go_to_point.PositionAction.action_fun">[docs]</a>	<span class="k">def</span> <span class="nf">action_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Method of the action server, if goal is canceled, robot is stopped.</span>
 <span class="sd">		Otherwise, if goal is set, it works as a finite state machine with</span>
@@ -442,6 +442,7 @@
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">global</span> <span class="n">kp_d</span><span class="p">,</span> <span class="n">kp_a</span>
 	
+	<span class="c1">#set velocities</span>
 	<span class="n">kp_d</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">x</span>
 	<span class="n">kp_a</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">angular</span><span class="o">.</span><span class="n">z</span></div>
 

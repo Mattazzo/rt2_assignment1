@@ -8,7 +8,7 @@
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"><highlight class="normal">cmake_minimum_required(VERSION<sp/>3.0.2)</highlight></codeline>
-<codeline lineno="2"><highlight class="normal"><ref refid="namespaceconf_1a45653c983098153b78e33600e39230eb" kindref="member">project</ref>(<ref refid="namespacert2__assignment1" kindref="compound">rt2_assignment1</ref>)</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"><ref refid="namespaceconf_1a45653c983098153b78e33600e39230eb" kindref="member">project</ref>(rt2_assignment1)</highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">##<sp/>Compile<sp/>as<sp/>C++11,<sp/>supported<sp/>in<sp/>ROS<sp/>Kinetic<sp/>and<sp/>newer</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>add_compile_options(-std=c++11)</highlight><highlight class="normal"></highlight></codeline>
@@ -116,7 +116,7 @@
 <codeline lineno="107"><highlight class="normal"></highlight><highlight class="preprocessor">##<sp/>DEPENDS:<sp/>system<sp/>dependencies<sp/>of<sp/>this<sp/>project<sp/>that<sp/>dependent<sp/>projects<sp/>also<sp/>need</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="108"><highlight class="normal">catkin_package(</highlight></codeline>
 <codeline lineno="109"><highlight class="normal">#<sp/><sp/>INCLUDE_DIRS<sp/>include</highlight></codeline>
-<codeline lineno="110"><highlight class="normal">#<sp/><sp/>LIBRARIES<sp/><ref refid="namespacert2__assignment1" kindref="compound">rt2_assignment1</ref></highlight></codeline>
+<codeline lineno="110"><highlight class="normal">#<sp/><sp/>LIBRARIES<sp/>rt2_assignment1</highlight></codeline>
 <codeline lineno="111"><highlight class="normal">#<sp/><sp/>CATKIN_DEPENDS<sp/>roscpp<sp/>rospy</highlight></codeline>
 <codeline lineno="112"><highlight class="normal">#<sp/><sp/>DEPENDS<sp/>system_lib</highlight></codeline>
 <codeline lineno="113"><highlight class="normal">)</highlight></codeline>

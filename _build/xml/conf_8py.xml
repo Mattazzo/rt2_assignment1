@@ -25,7 +25,7 @@
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>sys</highlight></codeline>
 <codeline lineno="16"><highlight class="normal">sys.path.insert(0,<sp/>os.path.abspath(</highlight><highlight class="stringliteral">&apos;.&apos;</highlight><highlight class="normal">))</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal">subprocess.call(</highlight><highlight class="stringliteral">&apos;doxygen<sp/>Doxygenfile.in&apos;</highlight><highlight class="normal">,<sp/>shell=</highlight><highlight class="keyword">True</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">subprocess.call(</highlight><highlight class="stringliteral">&apos;doxygen<sp/>Doxyfile.in&apos;</highlight><highlight class="normal">,<sp/>shell=</highlight><highlight class="keyword">True</highlight><highlight class="normal">)</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">#<sp/>--<sp/>Project<sp/>information<sp/>-----------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>

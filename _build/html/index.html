@@ -222,13 +222,13 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="scripts.go_to_point.PositionAction.go_to_point">
-<span class="sig-name descname"><span class="pre">go_to_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#PositionAction.go_to_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.PositionAction.go_to_point" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">go_to_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.go_to_point.PositionAction.go_to_point" title="Permalink to this definition">¶</a></dt>
 <dd><p>implement a state machine to let the robot reach a goal position</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">go_to_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#PositionAction.go_to_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="scripts.go_to_point.PositionAction.action_fun">
+<span class="sig-name descname"><span class="pre">action_fun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#PositionAction.action_fun"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.PositionAction.action_fun" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method of the action server, if goal is canceled, robot is stopped.
 Otherwise, if goal is set, it works as a finite state machine with
 4 state:</p>
@@ -342,6 +342,20 @@ subscriber for <em>/odom</em> topic, an action server for go to point service</p
 </div>
 <div class="section" id="position-service">
 <h1>Position Service<a class="headerlink" href="#position-service" title="Permalink to this headline">¶</a></h1>
+<p>This file implement a server to get a random position for the robot. </p>
+<p><p>Services:</p>
+<p>° /position_server</p>
+<dl class="simple">
+<dt><strong>Author</strong></dt><dd><p>Matteo Azzini </p>
+</dd>
+<dt><strong>Version</strong></dt><dd><p>1.0 </p>
+</dd>
+<dt><strong>Date</strong></dt><dd><p>23/07/2021</p>
+</dd>
+</dl>
+</p>
+<p>Description:</p>
+<p>Position server that returns a random position between the bounds specified in the request </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
 <dl class="cpp function">

@@ -76,11 +76,11 @@ class PositionAction():
 	## The constructor
 	def __init__(self):
 		"""Constructor"""
-		self.server = actionlib.SimpleActionServer('position', rt2_assignment1.msg.PositionAction, self.go_to_point, auto_start = False)
+		self.server = actionlib.SimpleActionServer('position', rt2_assignment1.msg.PositionAction, self.action_fun, auto_start = False)
 		self.server.start()
 	
 
-	def go_to_point(self, goal):
+	def action_fun(self, goal):
 		"""
 		Method of the action server, if goal is canceled, robot is stopped.
 		Otherwise, if goal is set, it works as a finite state machine with

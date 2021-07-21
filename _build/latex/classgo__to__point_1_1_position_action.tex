@@ -1,17 +1,12 @@
 \hypertarget{classgo__to__point_1_1_position_action}{}\doxysection{go\+\_\+to\+\_\+point.\+Position\+Action Class Reference}
 \label{classgo__to__point_1_1_position_action}\index{go\_to\_point.PositionAction@{go\_to\_point.PositionAction}}
-
-
-This class implement a Ros Action Server to let robot reach a goal position.  
-
-
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{classgo__to__point_1_1_position_action_abc7501764e5c7d64c959656b883d76f2}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
 \begin{DoxyCompactList}\small\item\em The constructor. \end{DoxyCompactList}\item 
-def \mbox{\hyperlink{classgo__to__point_1_1_position_action_a78b25d45617ea2b5b83c94cea1106154}{go\+\_\+to\+\_\+point}} (self, goal)
-\begin{DoxyCompactList}\small\item\em Function to reach a goal position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+def \mbox{\hyperlink{classgo__to__point_1_1_position_action_a71bda06bef30c8083f38a9ee57d8375d}{action\+\_\+fun}} (self, goal)
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -20,9 +15,9 @@ def \mbox{\hyperlink{classgo__to__point_1_1_position_action_a78b25d45617ea2b5b83
 
 
 \doxysubsection{Detailed Description}
-This class implement a Ros Action Server to let robot reach a goal position. 
+\begin{DoxyVerb}Class definition of the Action server go to point
 
-Class definition of the Action server go to point \begin{DoxyVerb}...
+...
 
 Attributes
 ----------  
@@ -30,7 +25,7 @@ _feedback: PositionFeedback
     feedback of PositionAction
 _result: PositionResult
     result of PositionAction
-
+    
 Methods
 ----------  
 __init__(self)
@@ -55,24 +50,24 @@ The constructor.
  
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classgo__to__point_1_1_position_action_a78b25d45617ea2b5b83c94cea1106154}\label{classgo__to__point_1_1_position_action_a78b25d45617ea2b5b83c94cea1106154}} 
-\index{go\_to\_point.PositionAction@{go\_to\_point.PositionAction}!go\_to\_point@{go\_to\_point}}
-\index{go\_to\_point@{go\_to\_point}!go\_to\_point.PositionAction@{go\_to\_point.PositionAction}}
-\doxysubsubsection{\texorpdfstring{go\_to\_point()}{go\_to\_point()}}
-{\footnotesize\ttfamily def go\+\_\+to\+\_\+point.\+Position\+Action.\+go\+\_\+to\+\_\+point (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{goal }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{classgo__to__point_1_1_position_action_a71bda06bef30c8083f38a9ee57d8375d}\label{classgo__to__point_1_1_position_action_a71bda06bef30c8083f38a9ee57d8375d}} 
+\index{go\_to\_point.PositionAction@{go\_to\_point.PositionAction}!action\_fun@{action\_fun}}
+\index{action\_fun@{action\_fun}!go\_to\_point.PositionAction@{go\_to\_point.PositionAction}}
+\doxysubsubsection{\texorpdfstring{action\_fun()}{action\_fun()}}
+{\footnotesize\ttfamily def go\+\_\+to\+\_\+point.\+Position\+Action.\+action\+\_\+fun (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{goal }\end{DoxyParamCaption})}
 
-
-
-Function to reach a goal position. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em self} & is the object pointer \\
-\hline
-{\em goal} & is the goal position to reach\\
-\hline
-\end{DoxyParams}
-Method of the action server, if goal is canceled, robot is stopped. Otherwise, if goal is set, it works as a finite state machine with 4 state\+: 0 -\/ Rotate robot to be headed for the goal 1 -\/ Go straight ahead 2 -\/ Robot is in the goal point, rotate to fix the heading 3 -\/ Goal reached, stop the robot ~\newline
+\begin{DoxyVerb}Method of the action server, if goal is canceled, robot is stopped.
+Otherwise, if goal is set, it works as a finite state machine with
+4 state:
+    0 - Rotate robot to be headed for the goal
+    1 - Go straight ahead
+    2 - Robot is in the goal point, rotate to fix the heading
+    3 - Goal reached, stop the robot 
+    
+Parameters
+----------
+    goal: goal to be reached by the robot
+\end{DoxyVerb}
  
 
 \doxysubsection{Member Data Documentation}

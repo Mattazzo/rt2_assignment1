@@ -15,7 +15,7 @@ import subprocess
 import sys
 sys.path.insert(0, os.path.abspath('.'))
 
-subprocess.call('doxygen Doxygenfile.in', shell=True)
+subprocess.call('doxygen Doxyfile.in', shell=True)
 
 # -- Project information -----------------------------------------------------
 
