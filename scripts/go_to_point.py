@@ -77,7 +77,7 @@ class PositionAction():
 	## The constructor
 	def __init__(self):
 		"""Constructor"""
-		self.server = actionlib.SimpleActionServer('position', rt2_assignment1.msg.PositionAction, self.go_to_point, auto_start = False)
+		self.server = actionlib.SimpleActionServer('position', rt2_assignment1.msg.PositionAction, self.action_fun, auto_start = False)
 		self.server.start()
 	
 	## 
@@ -93,7 +93,7 @@ class PositionAction():
 	#		1 - Go straight ahead
 	#		2 - Robot is in the goal point, rotate to fix the heading
 	#		3 - Goal reached, stop the robot 	
-	def go_to_point(self, goal):
+	def action_fun(self, goal):
 		
 		#helper variable 
 		success = True
