@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>rt2_assignment1 Final Assignment - Matteo Azzini 4475165: rt2_assignment1 - branch raction&#39; - Matteo Azzini 4475165</title>
+<title>rt2_assignment1 - Matteo Azzini 4475165: rt2_assignment1 - branch action&#39; - Matteo Azzini 4475165</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,10 +21,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">rt2_assignment1 Final Assignment - Matteo Azzini 4475165
+   <div id="projectname">rt2_assignment1 - Matteo Azzini 4475165
    &#160;<span id="projectnumber">1.0</span>
    </div>
-   <div id="projectbrief">Final assignment of Research Track 2 course</div>
+   <div id="projectbrief">Branch Doxygen with documentation and user interfaceas jupyter notebook</div>
   </td>
  </tr>
  </tbody>
@@ -64,17 +64,17 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title"><a class="el" href="namespacert2__assignment1.html">rt2_assignment1</a> - branch raction' - Matteo Azzini 4475165 </div>  </div>
+<div class="title"><a class="el" href="namespacert2__assignment1.html">rt2_assignment1</a> - branch action' - Matteo Azzini 4475165 </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
 Requirements</h1>
-<p>In this branch I was required to write <em><a class="el" href="go__to__point_8py.html" title="this Ros node implement an Action Server to let the robot reach a goal">go_to_point.py</a></em> node as an ROS Action server instead of a simple server. Therefore I had also to modify the FSM node in oredr to let it be able to cancel a goal.</p>
+<p>In this branch I was required to cahnge the user interface developping it on jupyter notebook, starting from the previous branch 'action'. I was also required to add a Doxygen documentation for the package.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Package Composition</h1>
 <p>The package contains the folllowing elements:</p><ul>
 <li><b>action</b>: folder with .action file to define an action</li>
-<li><b>doc</b>: folder with documentation about the package, generated with doxygen </li>
+<li><b>doc</b>: folder with Doxygen documentation about the package, generated with doxygen </li>
 <li><b>include</b>: folder required for a ROS2 package </li>
 <li><b>launch</b>: folder with a launch files to start the simulation both on Gazebo and Vrep</li>
 <li><b>src</b>: folder with the nodes written in cpp </li>
@@ -82,7 +82,6 @@ Package Composition</h1>
 <li><b>srv</b>: folder with .srv files to define the services</li>
 <li><b>CMakeList.txt</b>: file required to build the pacakge</li>
 <li><b>pacakage.xml</b>: file required to build the package</li>
-<li><b>scene.ttt</b>: Vrep scene</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Code Explanation</h1>
@@ -90,13 +89,12 @@ Code Explanation</h1>
 Launch files</h2>
 <ul>
 <li><b>sim.launch</b>: file to start the simulation on Gazebo</li>
-<li><b>sim_coppelia.launch</b>: file to start the simulation on Vrep</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md5"></a>
 Scripts</h2>
 <ul>
 <li><b><a class="el" href="go__to__point_8py.html" title="this Ros node implement an Action Server to let the robot reach a goal">go_to_point.py</a></b>: Action server to let the robot reach the goal position. It works as a finite state machine, when a goal position is received, it fixs robot yaw, go straight to the point and then rotate to have its heading like the desired yaw, so goal is reached. If the goal is canceled in the meanwhile robot is moving, server is preempted and so robot is stopped.</li>
-<li><b>user_interface.py</b>: ROS node to let user command the robot, it has a client for Command service and an action client for RandomPosition service. When user press 1 robot it makes a request to <em><a class="el" href="state__machine_8cpp.html" title="This file implement a state machine that control the robot.">state_machine.cpp</a></em> and robot start moving, otherwise, if he press 0, there is a request for COmmand server to stop the <em><a class="el" href="state__machine_8cpp.html" title="This file implement a state machine that control the robot.">state_machine.cpp</a></em> node, but also an action request <em>cancell_all_goals()</em> to cancel the goal for the robot and stop it as soon as possible. <br  />
+<li><b>user_interface.py</b>: ROS node, implemented as jupyter notebook, to let user command the robot, it has a client for Command service and an action client for RandomPosition service. When user press 1 robot it makes a request to <em><a class="el" href="state__machine_8cpp.html" title="This file implement a state machine that control the robot.">state_machine.cpp</a></em> and robot start moving, otherwise, if he press 0, there is a request for COmmand server to stop the <em><a class="el" href="state__machine_8cpp.html" title="This file implement a state machine that control the robot.">state_machine.cpp</a></em> node, but also an action request <em>cancell_all_goals()</em> to cancel the goal for the robot and stop it as soon as possible. <br  />
 </li>
 </ul>
 <h2><a class="anchor" id="autotoc_md6"></a>
@@ -120,13 +118,8 @@ Simulation on Gazebo</h2>
 <li>Download and build this package in the src folder of your ROS worksapace</li>
 <li>Launch the simulation executing the following command in your ROS worksapce <div class="fragment"><div class="line">roslaunch rt2_assignment1 sim.launch</div>
 </div><!-- fragment --></li>
+<li>Open the user_interface in the jupyter notebook and run it (instruction are specified in the notebook) N.B. Remeber to source your ROS workspace </li>
 </ol>
-<p>N.B. Remeber to source your ROS workspace</p>
-<h2><a class="anchor" id="autotoc_md10"></a>
-Simulation on Vrep</h2>
-<p>Repeate points 1 and 2 as before, but with a different launch file </p><div class="fragment"><div class="line">roslaunch rt2_assignemnt1 sim_coppelia.launch</div>
-</div><!-- fragment --><p>Then in another terminal you need to source again the ROS environment, than go into <em>CoppeliaSim_Edu_V4_2_0_Ubuntu20_04</em> folder ( available at this link <a href="http://www.coppeliarobotics.com/downloads.html">http://www.coppeliarobotics.com/downloads.html</a> ) and excute </p><div class="fragment"><div class="line">./coppeliaSim.sh</div>
-</div><!-- fragment --><p>The Vrep GUI will start, from here you need to open the vrep scene <em>scene.ttt</em> available in this branch and start the simulation with the play button </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

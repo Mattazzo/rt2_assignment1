@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['fix_5ffinal_5fyaw_6',['fix_final_yaw',['../namespacego__to__point.html#a4a406386ca62830c19c93949e923f7bd',1,'go_to_point']]],
-  ['fix_5fyaw_7',['fix_yaw',['../namespacego__to__point.html#a9c3011a3065fcbefcc1c5ad8c9979669',1,'go_to_point']]]
+  ['dist_5fprecision_5f_5',['dist_precision_',['../namespacego__to__point.html#a6a1e4eb20ebd4fce0fc56b0ebfd7a8d5',1,'go_to_point']]],
+  ['done_6',['done',['../namespacego__to__point.html#ac2587220a4ac9c845bc9c5b0b45d5835',1,'go_to_point']]]
 ];
