@@ -30,21 +30,43 @@ import math
 import actionlib
 import rt2_assignment1.msg #import PositionAction
 
-# robot state variables
+"""robot position"""
 position_ = Point()	
-yaw_ = 0			
-position_ = 0		
-state_ = 0				
+
+"""robot yaw"""
+yaw_ = 0	
+
+""" robot position"""		
+position_ = 0
+
+"""robot state"""		
+state_ = 0		
+
+"""velocity publisher"""		
 pub_ = None				
 
-# parameters for control
-yaw_precision_ = math.pi / 9		
+"""yaw precision of 20 degrees"""
+yaw_precision_ = math.pi / 9	
+
+"""yaw precision of 2 degrees"""	
 yaw_precision_2_ = math.pi / 90	
-dist_precision_ = 0.1				
+
+"""distance precision"""
+dist_precision_ = 0.1	
+
+"""angular velocity constant"""			
 kp_a = -3.0
-kp_d = 0.2							
-ub_a = 0.6							
-lb_a = -0.5							
+
+"""linear velocity constant"""	
+kp_d = 0.2
+
+"""angular velocity upper bound"""								
+ub_a = 0.6		
+
+"""angular velocity lower bound"""						
+lb_a = -0.5			
+
+"""linear velocity upper bound"""				
 ub_d = 0.6							
 
 

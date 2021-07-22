@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="md__r_e_a_d_m_e" kind="page">
+    <compoundname>md_README</compoundname>
+    <title>rt2_assignment1 - branch raction&apos; - Matteo Azzini 4475165</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="md__r_e_a_d_m_e_1autotoc_md1">
+<title>Requirements</title>
+<para>In this branch I was required change the user interface node converting it into a jupiter noteboo and also I had to add a Sphinx documentation</para>
+</sect1>
+<sect1 id="md__r_e_a_d_m_e_1autotoc_md2">
+<title>Package Composition</title>
+<para>The package contains the folllowing elements:<itemizedlist>
+<listitem><para><bold>action</bold>: folder with .action file to define an action</para>
+</listitem><listitem><para><bold>doc</bold>: folder with Sphinx documentation about the package, generated with doxygen </para>
+</listitem><listitem><para><bold>include</bold>: folder required for a ROS2 package </para>
+</listitem><listitem><para><bold>launch</bold>: folder with a launch files to start the simulation both on Gazebo and Vrep</para>
+</listitem><listitem><para><bold>src</bold>: folder with the nodes written in cpp </para>
+</listitem><listitem><para><bold>urdf:</bold>: folder with info about the robot to spawn it in Gazebo simulation</para>
+</listitem><listitem><para><bold>srv</bold>: folder with .srv files to define the services</para>
+</listitem><listitem><para><bold>CMakeList.txt</bold>: file required to build the pacakge</para>
+</listitem><listitem><para><bold>pacakage.xml</bold>: file required to build the package</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="md__r_e_a_d_m_e_1autotoc_md3">
+<title>Code Explanation</title>
+<sect2 id="md__r_e_a_d_m_e_1autotoc_md4">
+<title>Launch files</title>
+<para><itemizedlist>
+<listitem><para><bold>sim.launch</bold>: file to start the simulation on Gazebo</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="md__r_e_a_d_m_e_1autotoc_md5">
+<title>Scripts</title>
+<para><itemizedlist>
+<listitem><para><bold><ref refid="go__to__point_8py" kindref="compound">go_to_point.py</ref></bold>: Action server to let the robot reach the goal position. It works as a finite state machine, when a goal position is received, it fixs robot yaw, go straight to the point and then rotate to have its heading like the desired yaw, so goal is reached. If the goal is canceled in the meanwhile robot is moving, server is preempted and so robot is stopped.</para>
+</listitem><listitem><para><bold>user_interface.py</bold>: ROS node, implemented as jupyter notebook, to let user command the robot, it has a client for Command service and an action client for RandomPosition service. When user press 1 robot it makes a request to <emphasis><ref refid="state__machine_8cpp" kindref="compound">state_machine.cpp</ref></emphasis> and robot start moving, otherwise, if he press 0, there is a request for COmmand server to stop the <emphasis><ref refid="state__machine_8cpp" kindref="compound">state_machine.cpp</ref></emphasis> node, but also an action request <emphasis>cancell_all_goals()</emphasis> to cancel the goal for the robot and stop it as soon as possible. <linebreak/>
+</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="md__r_e_a_d_m_e_1autotoc_md6">
+<title>src</title>
+<para><itemizedlist>
+<listitem><para><bold><ref refid="state__machine_8cpp" kindref="compound">state_machine.cpp</ref></bold>: ROS node with a server for Command service, a client fro RandomPosition service and an action client for Position service. When the server receives a &quot;start&quot; command, it sets a variable start to true and the main function has a loop that request a random goal position, then send it as a goal for the action server <emphasis><ref refid="go__to__point_8py" kindref="compound">go_to_point.py</ref></emphasis> in order to reach the goal. If the goal is reached before 30 seconds it prints the status SUCCEDEED, if the goal is canceled it prints the status PREEMPTED, otherwise if timer expires before reaching the goal, it prints a message to inform user that action is not finisched in time</para>
+</listitem><listitem><para><bold>position_server.cpp</bold>: implements a ROS server which receives as request the minimum and maximum value, within choose x and y coordinates. As response returns random x, y coordinates and the heading theta for a goal position</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="md__r_e_a_d_m_e_1autotoc_md7">
+<title>srv</title>
+<para><itemizedlist>
+<listitem><para><bold>Command.srv</bold>: Definition of Command service used to send a command to control the robot </para>
+</listitem><listitem><para><bold>Position.srv</bold>: Definition of Position service used to reach a goal position</para>
+</listitem><listitem><para><bold>RandomPosition.srv</bold>: Definition of RandomPosition used to get a random goal position</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+</sect1>
+<sect1 id="md__r_e_a_d_m_e_1autotoc_md8">
+<title>How to execute the code</title>
+<sect2 id="md__r_e_a_d_m_e_1autotoc_md9">
+<title>Simulation on Gazebo</title>
+<para><orderedlist>
+<listitem><para>Download and build this package in the src folder of your ROS worksapace</para>
+</listitem><listitem><para>Launch the simulation executing the following command in your ROS worksapce <programlisting><codeline><highlight class="normal">roslaunch<sp/>rt2_assignment1<sp/>sim.launch</highlight></codeline>
+</programlisting></para>
+</listitem><listitem><para>Open and run the user interface on jupyter notebook (instruction inside the document) N.B. Remeber to source your ROS workspace </para>
+</listitem></orderedlist>
+</para>
+</sect2>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>
