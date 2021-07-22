@@ -3,6 +3,8 @@
 ## Requirements
 In this branch I was required to write *go_to_point.py* node as an ROS Action server instead of a simple server. Therefore I had also to modify the FSM node in oredr to let it be able to cancel a goal.
 
+Documentation available at https://mattazzo.github.io/rt2_assignment1/
+
 ## Package Composition
 The package contains the folllowing elements:</br>
 - **action**: folder with .action file to define an action</br>
