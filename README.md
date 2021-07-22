@@ -3,6 +3,8 @@
 ## Requirements
 In this branch I was required to cahnge the user interface developping it on jupyter notebook, starting from the previous branch 'action'. I was also required to add a Doxygen documentation for the package.
 
+Documentation available at https://mattazzo.github.io/rt2_assignment1/
+
 ## Package Composition
 The package contains the folllowing elements:</br>
 - **action**: folder with .action file to define an action</br>
