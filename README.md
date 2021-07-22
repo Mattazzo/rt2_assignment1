@@ -1,7 +1,9 @@
 # rt2_assignment1 - branch raction' - Matteo Azzini 4475165
 
 ## Requirements
-In this branch I was required change the user interface node converting it into a jupiter noteboo and also I had to add a Sphinx documentation 
+In this branch I was required change the user interface node converting it into a jupiter noteboo and also I had to add a Sphinx documentation.
+
+Documentation available at https://mattazzo.github.io/rt2_assignment1/
 
 ## Package Composition
 The package contains the folllowing elements:</br>
