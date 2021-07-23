@@ -7,7 +7,7 @@ Documentation available at https://mattazzo.github.io/rt2_assignment1/
 
 ## Package Composition
 The package contains the folllowing elements:</br>
-- **.ipynb_checkpoints**: folder containning jupyter notebook checkpoints
+- **.ipynb_checkpoints**: folder containning jupyter notebook checkpoints</br>
 - **action**: folder with .action file to define an action</br>
 - **doc**: folder with Doxygen documentation about the package, generated with doxygen </br>
 - **include**: folder required for a ROS2 package </br>
@@ -17,7 +17,7 @@ The package contains the folllowing elements:</br>
 - **srv**: folder with .srv files to define the services</br>
 - **CMakeList.txt**: file required to build the pacakge</br>
 - **pacakage.xml**: file required to build the package</br>
-- **user_interface.ipynb**: user interface module implmented as jupyter notebook
+- **user_interface.ipynb**: user interface module implmented as jupyter notebook</br>
 
 ## Code Explanation
 
